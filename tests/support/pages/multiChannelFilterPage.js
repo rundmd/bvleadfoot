@@ -1,25 +1,27 @@
 define(['../utils', './elementsPage', './propertiesPage', 'require'], function (utils, elementsPage, propertiesPage, require) {
-    function langFilterPage(remote) {
+    function multiChannelFilterPage(remote) {
         this.remote = remote;
     }
 
-    langFilterPage.prototype = {
-        constructor: langFilterPage,
+    multiChannelFilterPage.prototype = {
+        constructor: multiChannelFilterPage,
 
         addFilter: function () {
             var session = this.remote;
             return session
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
-                //.findByXpath(elementsPage.MODAL_DIALOG_LOCATOR)
                 .get(propertiesPage.CONSOLE_URL)
                 .setFindTimeout(5000)
-                .findById(elementsPage.FILTER_BTN_ID)
+                .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', elementsPage.LANGUAGE_FILTER_LOCATOR);
+                    return utils.enterText(session, 'facebook', elementsPage.CHANNEL_FILTER_LOCATOR);
+                })
+                .then(function () {
+                    return utils.enterText(session, 'google', elementsPage.CHANNEL_FILTER_LOCATOR);
                 })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
@@ -30,6 +32,6 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
         }
     };
 
-    return langFilterPage;
+    return multiChannelFilterPage;
 });
 

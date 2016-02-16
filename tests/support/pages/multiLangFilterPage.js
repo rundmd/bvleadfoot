@@ -1,10 +1,10 @@
 define(['../utils', './elementsPage', './propertiesPage', 'require'], function (utils, elementsPage, propertiesPage, require) {
-    function langFilterPage(remote) {
+    function multiLangFilterPage(remote) {
         this.remote = remote;
     }
 
-    langFilterPage.prototype = {
-        constructor: langFilterPage,
+    multiLangFilterPage.prototype = {
+        constructor: multiLangFilterPage,
 
         addFilter: function () {
             var session = this.remote;
@@ -21,6 +21,9 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 .then(function () {
                     return utils.enterText(session, 'german', elementsPage.LANGUAGE_FILTER_LOCATOR);
                 })
+                .then(function () {
+                    return utils.enterText(session, 'french', elementsPage.LANGUAGE_FILTER_LOCATOR);
+                })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
                 .getVisibleText()
@@ -30,6 +33,6 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
         }
     };
 
-    return langFilterPage;
+    return multiLangFilterPage;
 });
 

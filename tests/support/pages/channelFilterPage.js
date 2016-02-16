@@ -1,4 +1,4 @@
-define(['../utils', './pageElements', 'require'], function (utils, pageElements, require) {
+define(['../utils', './elementsPage', './propertiesPage', 'require'], function (utils, elementsPage, propertiesPage, require) {
     function channelFilterPage(remote) {
         this.remote = remote;
     }
@@ -9,15 +9,19 @@ define(['../utils', './pageElements', 'require'], function (utils, pageElements,
         addFilter: function () {
             var session = this.remote;
             return session
-                .get('http://localhost:8085')
+                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
+                //.click()
+                .get(propertiesPage.CONSOLE_URL)
                 .setFindTimeout(5000)
                 .findById('btn-filters')
                     .click()
+                    .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'instagram', pageElements.CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, 'facebook', elementsPage.CHANNEL_FILTER_LOCATOR);
                 })
-                .findByXpath('//strong[@data-reactid=".0.1.1.0.0.0"]')
+                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
+                .sleep(2000)
                 .getVisibleText()
                 .then(function (text) {
                     return text;;
