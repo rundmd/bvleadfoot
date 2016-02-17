@@ -15,7 +15,6 @@ define([
     var LAST7DAYS = 'last 7 days';
     var LAST30DAYS = 'last 30 days';
     var CUSTOM = 'custom';
-    var CUSTOM_RESULTS = '4001';
     var START_DATE_INPUT_LOCATOR = '//input[@data-reactid=".0.1.0.0.1.0.0.$dateRange.1.1.$0.0.1.0"]';
     var PREV_MONTH = '//a[@data-reactid=".1.0.1.0"]';
     var NEXT_MONTH = '//a[@data-reactid=".1.0.1.2"]';
@@ -24,8 +23,7 @@ define([
     creationDateFilterPage.prototype = {
         constructor: creationDateFilterPage,
         
-        CHANNEL_FILTER_RESULTS: '21',
-        MULTI_CHANNEL_FILTER_RESULTS: '23',
+        CUSTOM_RESULTS: '4001',
         
         custom: function () {
             var session = this.remote;
@@ -42,9 +40,10 @@ define([
                     return utils.enterText(session, CUSTOM, CREATION_DATE_FILTER_LOCATOR);
                 })
                 .findByXpath(START_DATE_INPUT_LOCATOR)
-                .then(function (element) {
-                        pollUntil(utils.elementIsVisible(element), 1000);
-                })
+                .sleep(1000)
+                //.then(function (element) {
+                  //      pollUntil(utils.elementIsVisible(element), 5000);
+                //})
                     .click()
                     .end()
                 .findByXpath(PREV_MONTH)
