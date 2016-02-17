@@ -11,7 +11,7 @@ define([
    
     var loginPage, channelFilterPage;
 
-    bdd.describe('advanced search filters', function () {
+    bdd.describe('Channel Filter', function () {
         bdd.before(function () {
             loginPage = new loginPage(this.remote);
             channelFilterPage = new channelFilterPage(this.remote);
@@ -43,7 +43,7 @@ define([
             return channelFilterPage
                 .clearSingleFilter()
                 .then(function (results) {
-                    assert.equal(results, 21);
+                    assert.equal(results, channelFilterPage.CHANNEL_FILTER_RESULTS);
                 });
         });
 
@@ -51,7 +51,8 @@ define([
             return channelFilterPage
                 .clearMultiFilters()
                 .then(function (results) {
-                    assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
                 });
         });
 
@@ -59,7 +60,8 @@ define([
             return channelFilterPage
                 .clearAllFilters()
                 .then(function (results) {
-                    assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
                 });
         });
 

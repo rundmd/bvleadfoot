@@ -1,13 +1,20 @@
-define(['../utils', './elementsPage', './propertiesPage', 'require'], function (utils, elementsPage, propertiesPage, require) {
+define([
+    '../utils', 
+    './elementsPage', 
+    './propertiesPage', 
+    'intern/dojo/node!leadfoot/helpers/pollUntil',
+    'require'
+], function (utils, elementsPage, propertiesPage, pollUntil, require) {
     function channelFilterPage(remote) {
         this.remote = remote;
     }
 
     var CHANNEL_FILTER_LOCATOR = '//div[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$placeholder"]';
-    var FACEBOOK_FILTER_RESULTS = '21';
-    var CLEAR_GOOGLE_FILTER_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$GOOGLEPLUS.0"]';
-    var CLEAR_FACEBOOK_FILTER_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$FACEBOOK.0"]'
+    var CLEAR_FILTER1_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$FACEBOOK.0"]';
+    var CLEAR_FILTER2_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$GOOGLEPLUS.0"]';
     var CLEAR_ALL_FILTERS_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.3.0"]';
+    var CHANNEL1 = 'facebook';
+    var CHANNEL2 = 'google';
 
     channelFilterPage.prototype = {
         constructor: channelFilterPage,
@@ -21,13 +28,13 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000)) 
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'facebook', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
                 })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
@@ -43,16 +50,16 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'facebook', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'google', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
                 })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
@@ -68,19 +75,19 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'facebook', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'google', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_GOOGLE_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER2_LOCATOR)
                     .click()
                     .end()
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
@@ -97,22 +104,22 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'facebook', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'google', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_GOOGLE_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER1_LOCATOR)
                     .click()
                     .end()
-                .findByXpath(CLEAR_FACEBOOK_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER2_LOCATOR)
                     .click()
                     .end()
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
@@ -130,16 +137,16 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'facebook', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'google', CHANNEL_FILTER_LOCATOR);
+                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
                 })
                 .sleep(2000)
                 .findByXpath(CLEAR_ALL_FILTERS_LOCATOR)

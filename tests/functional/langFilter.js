@@ -11,7 +11,7 @@ define([
    
     var loginPage, langFilterPage;
 
-    bdd.describe('advanced search filters', function () {
+    bdd.describe('Language Filter', function () {
         bdd.before(function () {
             loginPage = new loginPage(this.remote);
             langFilterPage = new langFilterPage(this.remote);
@@ -43,7 +43,7 @@ define([
             return langFilterPage
                 .clearSingleFilter()
                 .then(function (results) {
-                    assert.equal(results, 114);
+                    assert.equal(results, langFilterPage.LANG_FILTER_RESULTS);
                 });
         });
 
@@ -51,7 +51,8 @@ define([
             return langFilterPage
                 .clearMultiFilters()
                 .then(function (results) {
-                    assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
                 });
         });
 
@@ -59,7 +60,8 @@ define([
             return langFilterPage
                 .clearAllFilters()
                 .then(function (results) {
-                    assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
                 });
         });
 

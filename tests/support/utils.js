@@ -1,7 +1,6 @@
 define(function (require) {
     return {
         enterText: function(session, text, locator) {
-            console.log('in enterText: ' + text);
             var text = text.split('');
             var input;
             return session
@@ -13,6 +12,11 @@ define(function (require) {
                     }
                     input.pressKeys('\uE006');
                 });
+        },
+
+        elementIsVisible: function(element) {
+            return element      
+                .isDisplayed();
         }
     };
 });

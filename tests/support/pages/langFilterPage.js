@@ -1,12 +1,20 @@
-define(['../utils', './elementsPage', './propertiesPage', 'require'], function (utils, elementsPage, propertiesPage, require) {
+define([
+    '../utils', 
+    './elementsPage', 
+    './propertiesPage', 
+    'intern/dojo/node!leadfoot/helpers/pollUntil',
+    'require'
+], function (utils, elementsPage, propertiesPage, pollUntil, require) {
     function langFilterPage(remote) {
         this.remote = remote;
     }
 
     var LANG_FILTER_LOCATOR = '//div[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$placeholder"]';
-    var CLEAR_GERMAN_FILTER_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$de.0"]';
-    var CLEAR_FRENCH_FILTER_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$fr.0"]'
+    var CLEAR_FILTER1_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$de.0"]';
+    var CLEAR_FILTER2_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$fr.0"]'
     var CLEAR_ALL_FILTERS_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.3.0"]';
+    var LANG1 = 'german';
+    var LANG2 = 'french';
 
     langFilterPage.prototype = {
         constructor: langFilterPage,
@@ -20,13 +28,13 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
                 })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
@@ -42,16 +50,16 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'french', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG2 /*'french'*/, LANG_FILTER_LOCATOR);
                 })
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
                 .sleep(2000)
@@ -67,19 +75,19 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'french', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_FRENCH_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER2_LOCATOR)
                     .click()
                     .end()
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
@@ -96,22 +104,22 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'french', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_GERMAN_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER1_LOCATOR)
                     .click()
                     .end()
-                .findByXpath(CLEAR_FRENCH_FILTER_LOCATOR)
+                .findByXpath(CLEAR_FILTER2_LOCATOR)
                     .click()
                     .end()
                 .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
@@ -129,16 +137,16 @@ define(['../utils', './elementsPage', './propertiesPage', 'require'], function (
                 //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
                 //.click()
                 .get(propertiesPage.CONSOLE_URL)
-                .setFindTimeout(5000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, 'german', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
                 })
                 .then(function () {
-                    return utils.enterText(session, 'french', LANG_FILTER_LOCATOR);
+                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
                 })
                 .sleep(2000)
                 .findByXpath(CLEAR_ALL_FILTERS_LOCATOR)
