@@ -4,64 +4,74 @@ define([
     'intern/dojo/node!leadfoot/Command', 
     '../support/utils',
     '../support/pages/elementsPage',    
+    '../support/pages/propertiesPage',
     '../support/pages/loginPage',
     '../support/pages/channelFilterPage',
     'require'
-], function (bdd, assert, Command, utils, elementsPage, loginPage, channelFilterPage, require) {
+], function (bdd, assert, Command, utils, elementsPage, properties, loginPage, channelFilterPage, require) {
    
-    var loginPage, channelFilterPage;
+    var loginPage; 
+    var channelFilterPage;
 
     bdd.describe('Channel Filter', function () {
         bdd.before(function () {
             loginPage = new loginPage(this.remote);
             channelFilterPage = new channelFilterPage(this.remote);
+            return loginPage.loginWithIntroCookie();
+        });
+
+        bdd.after(function () {
+            return loginPage.logout();
         });
 
         bdd.beforeEach(function () {
-            //return loginPage.login();
+            //return loginPage.loginWithIntroCookie()
+            //return this.remote
+              //  .get(properties.CONSOLE_URL);
         });
 
         bdd.it('should filter on channel', function () {
             //this.skip();
             return channelFilterPage
-                .addSingleFilter()
+                .singleFilter()
                 .then(function (results) {
-                    assert.equal(results, channelFilterPage.CHANNEL_FILTER_RESULTS);
+                    assert.equal(results, properties.CHANNEL_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should filter on multiple channels', function () {
             //this.skip();
             return channelFilterPage
-                .addMultiFilters()
+                .multiFilters()
                 .then(function (results) {
-                    assert.equal(results, channelFilterPage.MULTI_CHANNEL_FILTER_RESULTS);
+                    assert.equal(results, properties.MULTI_CHANNEL_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear a single filter option', function () {
+            //this.skip();
             return channelFilterPage
                 .clearSingleFilter()
                 .then(function (results) {
-                    assert.equal(results, channelFilterPage.CHANNEL_FILTER_RESULTS);
+                    assert.equal(results, properties.CHANNEL_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear multiple filter options', function () {
+            //this.skip();
             return channelFilterPage
                 .clearMultiFilters()
                 .then(function (results) {
-                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
-                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.equal(results, properties.DEFAULT_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear all filter options', function () {
+            //this.skip();
             return channelFilterPage
                 .clearAllFilters()
                 .then(function (results) {
-                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
-                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.equal(results, properties.DEFAULT_FILTER_RESULTS);
                 });
         });
 

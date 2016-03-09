@@ -15,8 +15,14 @@ define(function (require) {
         },
 
         elementIsVisible: function(element) {
-            return element      
-                .isDisplayed();
+            //return (element.isDisplayed()) ? true : null;;
+            return element.isDisplayed();
+            
+        },
+
+        elementIsVisible2: function(element) {
+            return (element.offsetParent !== null) ? element : null;
         }
+
     };
 });

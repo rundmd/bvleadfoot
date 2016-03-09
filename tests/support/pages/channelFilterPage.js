@@ -4,160 +4,139 @@ define([
     './propertiesPage', 
     'intern/dojo/node!leadfoot/helpers/pollUntil',
     'require'
-], function (utils, elementsPage, propertiesPage, pollUntil, require) {
+], function (utils, elements, properties, pollUntil, require) {
     function channelFilterPage(remote) {
         this.remote = remote;
     }
 
-    var CHANNEL_FILTER_LOCATOR = '//div[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$placeholder"]';
-    var CLEAR_FILTER1_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$FACEBOOK.0"]';
-    var CLEAR_FILTER2_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.0:$GOOGLEPLUS.0"]';
-    var CLEAR_ALL_FILTERS_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1.3.0"]';
-    var CHANNEL1 = 'facebook';
-    var CHANNEL2 = 'google';
+    var FILTERS = {
+            facebook: {locator: elements.CHANNEL_FILTER_LOCATOR, text: 'facebook', clearLocator: elements.FACEBOOK_CLEAR_LOCATOR},
+            googleplus: {locator: elements.CHANNEL_FILTER_LOCATOR, text: 'google', clearLocator: elements.GOOGLEPLUS_CLEAR_LOCATOR}
+    };
 
     channelFilterPage.prototype = {
         constructor: channelFilterPage,
         
-        CHANNEL_FILTER_RESULTS: '21',
-        MULTI_CHANNEL_FILTER_RESULTS: '23',
-        
-        addSingleFilter: function () {
+        singleFilter: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000)) 
+                .then(function (){
+                    return utils.openAdvancedSearch(session);
+                })
+                .setFindTimeout(10000)
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.facebook);
                 })
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
-        addMultiFilters: function () {
+        multiFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .then(function (){
+                    return utils.openAdvancedSearch(session);
+                })
+                .setFindTimeout(10000)
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.facebook);
                 })
                 .then(function () {
-                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.googleplus);
                 })
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
         clearSingleFilter: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .then(function (){
+                    return utils.openAdvancedSearch(session);
+                })
+                .setFindTimeout(10000)
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.facebook);
                 })
                 .then(function () {
-                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.googleplus);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_FILTER2_LOCATOR)
+                .findByXpath(FILTERS.googleplus.clearLocator)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
         clearMultiFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .then(function (){
+                    return utils.openAdvancedSearch(session);
+                })
+                .setFindTimeout(10000)
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.facebook);
                 })
                 .then(function () {
-                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.googleplus);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_FILTER1_LOCATOR)
+                .findByXpath(FILTERS.facebook.clearLocator)
                     .click()
                     .end()
-                .findByXpath(CLEAR_FILTER2_LOCATOR)
+                .findByXpath(FILTERS.googleplus.clearLocator)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
         
-        // Need to complete
         clearAllFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .then(function (){
+                    return utils.openAdvancedSearch(session);
+                })
+                .setFindTimeout(10000)
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, CHANNEL1, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.facebook);
                 })
                 .then(function () {
-                    return utils.enterText(session, CHANNEL2, CHANNEL_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.googleplus);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_ALL_FILTERS_LOCATOR)
+                .findByXpath(elements.CLEAR_ALL_CHANNELS_LOCATOR)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         }
 
     };

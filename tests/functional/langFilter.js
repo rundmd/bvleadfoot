@@ -3,65 +3,72 @@ define([
     'intern/chai!assert', 
     'intern/dojo/node!leadfoot/Command', 
     '../support/utils',
-    '../support/pages/elementsPage',    
+    '../support/pages/propertiesPage',
     '../support/pages/loginPage',
     '../support/pages/langFilterPage',
     'require'
-], function (bdd, assert, Command, utils, elementsPage, loginPage, langFilterPage, require) {
+], function (bdd, assert, Command, utils, properties, loginPage, langFilterPage, require) {
    
-    var loginPage, langFilterPage;
+    var loginPage; 
+    var langFilterPage;
 
     bdd.describe('Language Filter', function () {
         bdd.before(function () {
             loginPage = new loginPage(this.remote);
             langFilterPage = new langFilterPage(this.remote);
+            return loginPage.loginWithIntroCookie();
+        });
+
+        bdd.after(function () {
+            return loginPage.logout();
         });
 
         bdd.beforeEach(function () {
-            //return loginPage.login();
+            //return loginPage.loginWithIntroCookie();
         });
 
         bdd.it('should filter on lang', function () {
             //this.skip();
             return langFilterPage
-                .addSingleFilter()
+                .singleFilter()
                 .then(function (results) {
-                    assert.equal(results, langFilterPage.LANG_FILTER_RESULTS);
+                    assert.equal(results, properties.LANG_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should filter on multiple langs', function () {
             //this.skip();
             return langFilterPage
-                .addMultiFilters()
+                .multiFilters()
                 .then(function (results) {
-                    assert.equal(results, langFilterPage.MULTI_LANG_FILTER_RESULTS);
+                    assert.equal(results, properties.MULTI_LANG_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear a single filter option', function () {
+            //this.skip();
             return langFilterPage
                 .clearSingleFilter()
                 .then(function (results) {
-                    assert.equal(results, langFilterPage.LANG_FILTER_RESULTS);
+                    assert.equal(results, properties.LANG_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear multiple filter options', function () {
+            //this.skip();
             return langFilterPage
                 .clearMultiFilters()
                 .then(function (results) {
-                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
-                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.equal(results, properties.DEFAULT_FILTER_RESULTS);
                 });
         });
 
         bdd.it('should clear all filter options', function () {
+            //this.skip();
             return langFilterPage
                 .clearAllFilters()
                 .then(function (results) {
-                    //assert.equal(results, elementsPage.DEFAULT_FILTER_RESULTS);
-                    assert.isAbove(results, elementsPage.DEFAULT_FILTER_RESULTS);
+                    assert.equal(results, properties.DEFAULT_FILTER_RESULTS);
                 });
         });
 

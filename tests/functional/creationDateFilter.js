@@ -21,6 +21,32 @@ define([
             //return loginPage.login();
         });
 
+        bdd.it('should filter on the last day', function () {
+            //this.skip();
+            return creationDateFilterPage
+                .lastDay()
+                .then(function (results) {
+                    assert.equal(results, creationDateFilterPage.RESULTS_LAST_DAY);
+                });
+        });
+
+        bdd.it('should filter on the last 7  days', function () {
+            return creationDateFilterPage
+                .last7Days()
+                .then(function (results) {
+                    assert.equal(results, creationDateFilterPage.RESULTS_7_DAYS);
+                });
+        });
+
+        bdd.it('should filter on the last 30 days', function () {
+            //this.skip();
+            return creationDateFilterPage
+                .last30Days()
+                .then(function (results) {
+                    assert.equal(results, creationDateFilterPage.RESULTS_30_DAYS);
+                });
+        });
+
         bdd.it('should filter on custom date range', function () {
             return creationDateFilterPage
                 .custom()

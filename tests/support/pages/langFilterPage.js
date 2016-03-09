@@ -4,160 +4,149 @@ define([
     './propertiesPage', 
     'intern/dojo/node!leadfoot/helpers/pollUntil',
     'require'
-], function (utils, elementsPage, propertiesPage, pollUntil, require) {
+], function (utils, elements, properties, pollUntil, require) {
     function langFilterPage(remote) {
         this.remote = remote;
     }
-
-    var LANG_FILTER_LOCATOR = '//div[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$placeholder"]';
-    var CLEAR_FILTER1_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$de.0"]';
-    var CLEAR_FILTER2_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.0:$fr.0"]'
-    var CLEAR_ALL_FILTERS_LOCATOR = '//span[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1.3.0"]';
-    var LANG1 = 'german';
-    var LANG2 = 'french';
+    
+    var FILTERS = {
+            german: {locator: elements.LANG_FILTER_LOCATOR, text: 'german', clearLocator: elements.GERMAN_CLEAR_LOCATOR},
+            french: {locator: elements.LANG_FILTER_LOCATOR, text: 'french', clearLocator: elements.FRENCH_CLEAR_LOCATOR}
+    };
 
     langFilterPage.prototype = {
         constructor: langFilterPage,
         
-        LANG_FILTER_RESULTS: '114',
-        MULTI_LANG_FILTER_RESULTS: '331',
-        
-        addSingleFilter: function () {
+        singleFilter: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .get(properties.CONSOLE_URL)
+                .findByXpath(elements.BETA_TAB_LOCATOR)
+                    .click()
+                    .end()
+                .setFindTimeout(5000)
+                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.german);
                 })
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
-        addMultiFilters: function () {
+        multiFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .get(properties.CONSOLE_URL)
+                .findByXpath(elements.BETA_TAB_LOCATOR)
+                    .click()
+                    .end()
+                .setFindTimeout(5000)
+                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.german);
                 })
                 .then(function () {
-                    return utils.enterText(session, LANG2 /*'french'*/, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.french);
                 })
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
         clearSingleFilter: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .get(properties.CONSOLE_URL)
+                .findByXpath(elements.BETA_TAB_LOCATOR)
+                .click()
+                .end()
+                .setFindTimeout(5000)
+                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.german);
                 })
                 .then(function () {
-                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.french);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_FILTER2_LOCATOR)
+                .findByXpath(FILTERS.french.clearLocator)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
 
         clearMultiFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .get(properties.CONSOLE_URL)
+                .findByXpath(elements.BETA_TAB_LOCATOR)
+                    .click()
+                    .end()
+                .setFindTimeout(5000)
+                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.german);
                 })
                 .then(function () {
-                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.french);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_FILTER1_LOCATOR)
+                .findByXpath(FILTERS.german.clearLocator)
                     .click()
                     .end()
-                .findByXpath(CLEAR_FILTER2_LOCATOR)
+                .findByXpath(FILTERS.french.clearLocator)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         },
         
-        // Need to complete
         clearAllFilters: function () {
             var session = this.remote;
             return session
-                //.findByXpath(elementsPage.BETA_TAB_LOCATOR)
-                //.click()
-                .get(propertiesPage.CONSOLE_URL)
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .get(properties.CONSOLE_URL)
+                .findByXpath(elements.BETA_TAB_LOCATOR)
+                    .click()
+                    .end()
+                .setFindTimeout(5000)
+                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.enterText(session, LANG1, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.german);
                 })
                 .then(function () {
-                    return utils.enterText(session, LANG2, LANG_FILTER_LOCATOR);
+                    return utils.addFilter(session, FILTERS.french);
                 })
                 .sleep(2000)
-                .findByXpath(CLEAR_ALL_FILTERS_LOCATOR)
+                .findByXpath(elements.CLEAR_ALL_LANG_LOCATOR)
                     .click()
                     .end()
-                .findByXpath(elementsPage.RESULTS_COUNT_LOCATOR)
-                .sleep(2000)
-                .getVisibleText()
-                .then(function (text) {
-                    return text;;
-                });
+                .findByXpath(elements.RESULTS_COUNT_LOCATOR)
+                .sleep(properties.FILTER_TIMEOUT)
+                .getVisibleText();
         }
 
     };
