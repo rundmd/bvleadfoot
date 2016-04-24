@@ -17,6 +17,7 @@ define([
             loginPage = new loginPage(this.remote);
             multipleFiltersPage = new multipleFiltersPage(this.remote);
             return loginPage.loginWithIntroCookie();
+            //return loginPage.login();
         });
 
         bdd.after(function () {
@@ -32,7 +33,7 @@ define([
         bdd.it('should filter on a combination of channels(channel, language, attachment)', function () {
             //this.skip();
             return multipleFiltersPage
-                .combinationFilter1()
+                .setCombinationFilter1()
                 .then(function (results) {
                     assert.equal(results, properties.COMBINATION1_FILTER_RESULTS);
                 });
@@ -41,7 +42,7 @@ define([
         bdd.it('should filter on combination of channels(channel, rm, moderation, tagging, display)', function () {
             //this.skip();
             return multipleFiltersPage
-                .combinationFilter2()
+                .setCombinationFilter2()
                 .then(function (results) {
                     assert.equal(results, properties.COMBINATION2_FILTER_RESULTS);
                 });

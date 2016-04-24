@@ -17,7 +17,7 @@ define([
     channelFilterPage.prototype = {
         constructor: channelFilterPage,
         
-        singleFilter: function () {
+        setSingleFilter: function () {
             var session = this.remote;
             return session
                 .then(function (){
@@ -28,6 +28,8 @@ define([
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
+                .findByXpath(elements.CHANNEL_FILTER_LOCATOR)
+                    .click()
                 .then(function () {
                     return utils.addFilter(session, FILTERS.facebook);
                 })
@@ -36,7 +38,7 @@ define([
                 .getVisibleText();
         },
 
-        multiFilters: function () {
+        setMultiFilters: function () {
             var session = this.remote;
             return session
                 .then(function (){
@@ -47,6 +49,8 @@ define([
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
+                .findByXpath(elements.CHANNEL_FILTER_LOCATOR)
+                    .click()
                 .then(function () {
                     return utils.addFilter(session, FILTERS.facebook);
                 })
@@ -69,6 +73,8 @@ define([
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
+                .findByXpath(elements.CHANNEL_FILTER_LOCATOR)
+                    .click()
                 .then(function () {
                     return utils.addFilter(session, FILTERS.facebook);
                 })
@@ -95,6 +101,8 @@ define([
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
+                .findByXpath(elements.CHANNEL_FILTER_LOCATOR)
+                    .click()
                 .then(function () {
                     return utils.addFilter(session, FILTERS.facebook);
                 })
@@ -124,6 +132,8 @@ define([
                     .click()
                     .sleep(2000) // needed for chrome
                     .end()
+                .findByXpath(elements.CHANNEL_FILTER_LOCATOR)
+                    .click()
                 .then(function () {
                     return utils.addFilter(session, FILTERS.facebook);
                 })

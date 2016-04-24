@@ -33,7 +33,7 @@ define([
         bdd.it('should filter on channel', function () {
             //this.skip();
             return channelFilterPage
-                .singleFilter()
+                .setSingleFilter()
                 .then(function (results) {
                     assert.equal(results, properties.CHANNEL_FILTER_RESULTS);
                 });
@@ -42,7 +42,7 @@ define([
         bdd.it('should filter on multiple channels', function () {
             //this.skip();
             return channelFilterPage
-                .multiFilters()
+                .setMultiFilters()
                 .then(function (results) {
                     assert.equal(results, properties.MULTI_CHANNEL_FILTER_RESULTS);
                 });

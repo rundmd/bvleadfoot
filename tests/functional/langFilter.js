@@ -30,7 +30,7 @@ define([
         bdd.it('should filter on lang', function () {
             //this.skip();
             return langFilterPage
-                .singleFilter()
+                .setSingleFilter()
                 .then(function (results) {
                     assert.equal(results, properties.LANG_FILTER_RESULTS);
                 });
@@ -39,7 +39,7 @@ define([
         bdd.it('should filter on multiple langs', function () {
             //this.skip();
             return langFilterPage
-                .multiFilters()
+                .setMultiFilters()
                 .then(function (results) {
                     assert.equal(results, properties.MULTI_LANG_FILTER_RESULTS);
                 });

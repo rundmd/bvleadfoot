@@ -22,7 +22,7 @@ define([
     multipleFiltersPage.prototype = {
         constructor: multipleFiltersPage,
        
-        combinationFilter1: function () {
+        setCombinationFilter1: function () {
             var session = this.remote;
             return session
                 .get(properties.CONSOLE_URL)
@@ -36,25 +36,25 @@ define([
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.channel);
+                    return utils.addComboFilter(session, FILTERS.channel);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.lang);
+                    return utils.addComboFilter(session, FILTERS.lang);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.attachment);
+                    return utils.addComboFilter(session, FILTERS.attachment);
                 })
                 .findByXpath(elements.RESULTS_COUNT_LOCATOR)
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .getVisibleText()
                 .then(function (text) {
                     return text;;
                 });
         },
 
-        combinationFilter2: function () {
+        setCombinationFilter2: function () {
             var session = this.remote;
             return session
                 .get(properties.CONSOLE_URL)
@@ -68,26 +68,26 @@ define([
                     .sleep(2000) // needed for chrome
                     .end()
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.channel);
+                    return utils.addComboFilter(session, FILTERS.channel);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.rm);
+                    return utils.addComboFilter(session, FILTERS.rm);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.moderation);
+                    return utils.addComboFilter(session, FILTERS.moderation);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.tagging);
+                    return utils.addComboFilter(session, FILTERS.tagging);
                 })
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .then(function () {
-                    return utils.addFilter(session, FILTERS.display);
+                    return utils.addComboFilter(session, FILTERS.display);
                 })
                 .findByXpath(elements.RESULTS_COUNT_LOCATOR)
-                .sleep(properties.FILTER_TIMEOUT)
+                .sleep(properties.COMBINATION_FILTER_TIMEOUT)
                 .getVisibleText();
         }
 
