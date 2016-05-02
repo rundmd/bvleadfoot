@@ -78,6 +78,65 @@ define([
                 //.sleep(1000);
             //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
             // TO DO
+        },
+
+        instagramLogin: function(session) {
+            // Store the current window handle
+            var winHandleBefore = session.getCurrentWindowHandle();
+
+            // Perform the click operation that opens new window
+
+            session.findByXpath(elements.UPLOAD_INSTA_BTN_LOCATOR).click();
+
+            session.switchToWindow().getCurrentWindowHandle();
+
+            // Switch to new window opened
+            // for(String winHandle : driver.getWindowHandles()){
+            //    driver.switchTo().window(winHandle);
+            //}
+
+            //var windowHandles = session.getAllWindowHandles();
+            //console.log('window handles: ' + str);
+            //console.log('window handles: ' + windowHandles[1]);
+            //windowHandles.forEach( function(winHandle) {
+            //    session.switchToWindow(winHandle);
+            //});
+
+            return session
+                .sleep(2000)
+                .findById(elements.INSTA_USERNAME_ID)
+                    .type(properties.INSTA_USERNAME)
+                    .end()
+                .findById(elements.INSTA_PW_ID)
+                    .type(properties.INSTA_PW)
+                    .end()
+                .findByCssSelector(elements.INSTA_LOGIN_BTN)
+                    .click()
+                    .end();
+        },
+
+        fillUploadForm: function(session) {
+            console.log('in fillUploadForm');
+            return session
+                .findByXpath(elements.UPLOAD_PHOTO_COMMENT_LOCATOR)
+                    .type('testing')
+                    .sleep(1000)
+                    .end()
+                //.findByXpath('//*[@id="caption"]/div[2]/div[2]/div/div/div/form/div/input')
+                .findByXpath(elements.UPLOAD_NICKNAME_LOCATOR)
+                    .click()
+                    .type('tester')
+                    .sleep(1000)
+                    .end()
+                .findById(elements.UPLOAD_TC_ID)
+                    .click()
+                    .sleep(1000)
+                    .end()
+                //.findByXpath('//*[@id="caption"]/div[2]/div[2]/div/div/div/form/button')
+                .findByXpath(elements.UPLOAD_SUBMIT_BTN_LOCATOR)
+                    .click()
+                    .sleep(2000)
+                    .end();
         }
 
     }
