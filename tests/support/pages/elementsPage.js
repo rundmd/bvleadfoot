@@ -45,5 +45,6 @@ define({
     INSTA_LOGIN_LINK_LOCATOR: '//a[@data-reactid=".0.1.0.1.1.0.1"]',
     INSTA_USERNAME_LOCATOR: '//input[@data-reactid=".0.1.0.1.0.1.2.0.0"]',
     INSTA_PW_LOCATOR: '//input[@data-reactid=".0.1.0.1.0.1.2.1.0"]',
-    INSTA_LOGIN_BTN_LOCATOR: '//button[@data-reactid=".0.1.0.1.0.1.2.2.0"]'
+    INSTA_LOGIN_BTN_LOCATOR: '//button[@data-reactid=".0.1.0.1.0.1.2.2.0"]',
+    INSTA_PROFILE_LOCATOR: '//a[@data-reactid=".0.2.0.0.1.1.2.0"]'
 });

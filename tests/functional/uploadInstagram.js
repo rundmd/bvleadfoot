@@ -7,19 +7,19 @@ define([
     '../support/pages/propertiesPage',
     '../support/pages/loginPage',
     '../support/pages/uploadInstagramPage',
+    '../support/pages/instagramLoginPage',
     'require'
-], function (bdd, assert, Command, utils, elements, properties, loginPage, uploadInstagramPage, require) {
+], function (bdd, assert, Command, utils, elements, properties, loginPage, uploadInstagramPage, instagramLoginPage, require) {
    
     var uploadInstagramPage;
+    var instagramLoginPage;
 
     bdd.describe('Instagram Upload', function () {
         bdd.before(function () {
             uploadInstagramPage = new uploadInstagramPage(this.remote);
+            instagramLoginPage = new instagramLoginPage(this.remote);
+            return instagramLoginPage.login();
         });
-
-       // bdd.after(function () {
-         //   return loginPage.logout();
-        //});
 
         bdd.it('should upload content from instagram', function () {
             return uploadInstagramPage

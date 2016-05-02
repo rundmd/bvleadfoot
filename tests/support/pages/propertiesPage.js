@@ -28,6 +28,8 @@ define({
     UPLOAD_PHOTO_THANK_YOU_MSG: 'Your photo was successfully submitted and is pending approval. Please allow up to 72 hours for your photo to appear on our website.',
     UPLOAD_VIDEO_THANK_YOU_MSG: 'Your video was successfully submitted and is pending approval. Please allow up to 72 hours for your video to appear on our website.',
     INSTA_USERNAME: 'og_instagangsta',
-    INSTA_PW: 'h8yst8ck'
+    INSTA_PW: 'h8yst8ck',
+    INSTA_URL: 'http://www.instagram.com',
+    INSTA_PROFILE_TEXT: 'Profile'
 });
 
