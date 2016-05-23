@@ -28,10 +28,10 @@ define({
 	//	{ browserName: 'firefox', version: '37', platform: ['WINDOWS', 'MAC'] },
 	//	{ browserName: 'firefox', version: '44', os: 'OS X', os_version: 'Yosemite'}, 
 	//	{ browserName: 'chrome', version: '39', platform: ['WINDOWS', 'MAC'] },
-		{ browserName: 'chrome', version: '48', platform: ['MAC'] }
+       		{ browserName: 'chrome', version: '48', platform: ['MAC'] }
 	//	{ browserName: 'safari', version: '8', platform: 'MAC' }
+       //         { browserName: 'chrome', version: '50', platform: ['MAC'] }
 	],
-
 	// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
 	maxConcurrency: 2,
 
@@ -62,8 +62,9 @@ define({
 
 	// Functional test suite(s) to execute against each browser once non-functional tests are completed
 	//functionalSuites: [ 'tests/functional/channelFilter', 'tests/functional/langFilter', /*'tests/functional/multipleFilters'*/ ],
-    functionalSuites: [ 'tests/functional/langFilter' ],
-
+               // functionalSuites: [ 'tests/functional/langFilter' ],
+     	     //  functionalSuites: [ 'tests/functional/uploadInstagramBrendon' ],
+	    functionalSuites: [ 'tests/functional/uploadVideo' ],
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
 	excludeInstrumentation: /^(?:tests|node_modules)\//
 
