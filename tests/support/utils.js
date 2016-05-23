@@ -137,6 +137,100 @@ define([
                     .click()
                     .sleep(2000)
                     .end();
+        },
+	
+     	fillUploadFormTest: function(session, theCheck) {
+		console.log('in fillUploadForm');
+		var comment;
+		var nickname;
+	
+		if(theCheck=="photo" || theCheck=="insta")
+		{
+			comment=elements.UPLOAD_PHOTO_COMMENT_LOCATOR;
+			nickname=elements.UPLOAD_NICKNAME_LOCATOR;
+		}
+		else if(theCheck=="video")
+		{
+			comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+                        nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+		}
+		
+		//change to what we decide the deafult is, also add more sources
+		else
+		{
+			comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+                        nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+		}
+		var timestamp=Date.now();
+        var time=timestamp.toString();
+		return session
+			.findByXpath(comment)
+                   		 .type(time)
+                   		 .sleep(1000)
+                   		 .end()
+  
+               		 .findByXpath(nickname)
+                   		 .click()
+                   		 .type(time)
+                   		 .sleep(1000)
+                   		 .end()
+               		 .findById(elements.UPLOAD_TC_ID)
+                   		 .click()
+                   		 .sleep(1000)
+                   		 .end()
+            
+               		 .findByXpath(elements.UPLOAD_SUBMIT_BTN_LOCATOR)
+                   		 .click()
+                   		 .sleep(2000)
+                   		 .end();
+
+	  },
+
+        fillUploadFormTest2: function(session, theCheck, theTime) {
+            console.log('in fillUploadForm');
+            var comment;
+            var nickname;
+
+            if(theCheck=="photo" || theCheck=="insta")
+            {
+                comment=elements.UPLOAD_PHOTO_COMMENT_LOCATOR;
+                nickname=elements.UPLOAD_NICKNAME_LOCATOR;
+            }
+            else if(theCheck=="video")
+            {
+                comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+                nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+            }
+
+            //change to what we decide the deafult is, also add more sources
+            else
+            {
+                comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+                nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+            }
+            //var timestamp=Date.now();
+            //var time=timestamp.toString();
+            return session
+                .findByXpath(comment)
+                .type(theTime)
+                .sleep(1000)
+                .end()
+
+                .findByXpath(nickname)
+                .click()
+                .type(theTime)
+                .sleep(1000)
+                .end()
+                .findById(elements.UPLOAD_TC_ID)
+                .click()
+                .sleep(1000)
+                .end()
+
+                .findByXpath(elements.UPLOAD_SUBMIT_BTN_LOCATOR)
+                .click()
+                .sleep(2000)
+                .end();
+
         }
 
     }

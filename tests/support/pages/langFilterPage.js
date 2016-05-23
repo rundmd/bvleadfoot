@@ -25,8 +25,8 @@ define([
                 .findByXpath(elements.BETA_TAB_LOCATOR)
                     .click()
                     .end()
-                .setFindTimeout(10000)
-                //.then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                //.setFindTimeout(10000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
                 .findById('btn-filters')
                     .click()
                     .sleep(2000) // needed for chrome
