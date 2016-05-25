@@ -14,23 +14,23 @@ define({
 		'browserstack.selenium_version': '2.48.2'
 		//'selenium_version': '2.48.2'
 	},
-    
-    defaultTimeout: 240000,
+
+	defaultTimeout: 240000,
 
 	// Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce
 	// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
 	// capabilities options specified for an environment will be copied as-is
 	environments: [
-	//	{ browserName: 'internet explorer', version: '11', platform: 'WIN8' /* WIN8 and IE11 for browserstack */ }
-	//	{ browserName: 'internet explorer', version: '11', platform: 'WIN7' /* WIN7 and IE11 for saucelabs */ } 
-	//	{ browserName: 'internet explorer', version: '10', platform: 'WIN8' },
-	//	{ browserName: 'internet explorer', version: '9', platform: 'WINDOWS' },
-	//	{ browserName: 'firefox', version: '37', platform: ['WINDOWS', 'MAC'] },
-	//	{ browserName: 'firefox', version: '44', os: 'OS X', os_version: 'Yosemite'}, 
-	//	{ browserName: 'chrome', version: '39', platform: ['WINDOWS', 'MAC'] },
-       		{ browserName: 'chrome', version: '48', platform: ['MAC'] }
-	//	{ browserName: 'safari', version: '8', platform: 'MAC' }
-       //         { browserName: 'chrome', version: '50', platform: ['MAC'] }
+		//	{ browserName: 'internet explorer', version: '11', platform: 'WIN8' /* WIN8 and IE11 for browserstack */ }
+		//	{ browserName: 'internet explorer', version: '11', platform: 'WIN7' /* WIN7 and IE11 for saucelabs */ } 
+		//	{ browserName: 'internet explorer', version: '10', platform: 'WIN8' },
+		//	{ browserName: 'internet explorer', version: '9', platform: 'WINDOWS' },
+		//	{ browserName: 'firefox', version: '37', platform: ['WINDOWS', 'MAC'] },
+		//	{ browserName: 'firefox', version: '44', os: 'OS X', os_version: 'Yosemite'}, 
+		//	{ browserName: 'chrome', version: '39', platform: ['WINDOWS', 'MAC'] },
+		{ browserName: 'chrome', version: '48', platform: ['MAC'] }
+		//	{ browserName: 'safari', version: '8', platform: 'MAC' }
+		//         { browserName: 'chrome', version: '50', platform: ['MAC'] }
 	],
 	// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
 	maxConcurrency: 2,
@@ -38,15 +38,15 @@ define({
 	// Name of the tunnel class to use for WebDriver tests.
 	// See <https://theintern.github.io/intern/#option-tunnel> for built-in options
 	//tunnel: 'BrowserStackTunnel',
-    tunnel: 'NullTunnel',
+	tunnel: 'NullTunnel',
 	//tunnel: 'SauceLabsTunnel',
-    //tunnelOptions: {
-    //    username: 'jakehatesgoonies1',
-        //username: 'drewdimanlig1',
-        //accessKey: '5616c670-da91-4921-a41f-3245d8c5e487'
-        //accessKey: '7vhcAVtLQRy7UxRJq5Gm'
-    //    accessKey: 'nFU7hNEkRKaTDzkyJJLy'
-    //},
+	//tunnelOptions: {
+	//    username: 'jakehatesgoonies1',
+	//username: 'drewdimanlig1',
+	//accessKey: '5616c670-da91-4921-a41f-3245d8c5e487'
+	//accessKey: '7vhcAVtLQRy7UxRJq5Gm'
+	//    accessKey: 'nFU7hNEkRKaTDzkyJJLy'
+	//},
 
 	// Configuration options for the module loader; any AMD configuration options supported by the AMD loader in use
 	// can be used here.
@@ -62,11 +62,11 @@ define({
 
 	// Functional test suite(s) to execute against each browser once non-functional tests are completed
 	//functionalSuites: [ 'tests/functional/channelFilter', 'tests/functional/langFilter', /*'tests/functional/multipleFilters'*/ ],
-               // functionalSuites: [ 'tests/functional/langFilter' ],
-     	     //  functionalSuites: [ 'tests/functional/uploadInstagramBrendon' ],
-	    functionalSuites: [ 'tests/functional/uploadVideo' ],
+	// functionalSuites: [ 'tests/functional/langFilter' ],
+	//  functionalSuites: [ 'tests/functional/uploadPhoto' ],
+	functionalSuites: [ 'tests/functional/filterTest' ],
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
 	excludeInstrumentation: /^(?:tests|node_modules)\//
 
-    
+
 });
