@@ -37,7 +37,8 @@ define({
     UPLOAD_SUBMIT_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.2"]',
     UPLOAD_VIDEO_BTN_LOCATOR: '//*[@id="index"]/div[2]/div[2]/div/div/div/div/button[2]',
     UPLOAD_VIDEO_BTN_LOCATOR2: '//*[@id="app-wrapper"]/div/div[2]/div[2]/div/div/div/form/div/label/input',
-    UPLOAD_INSTA_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.3"]',
+    UPLOAD_INSTA_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.4"]',
+    UPLOAD_FB_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.3"]',
     INSTA_USERNAME_ID: 'id_username',
     INSTA_PW_ID: 'id_password',
     INSTA_LOGIN_BTN: '#login-form > p.form-actions > input',
@@ -47,5 +48,8 @@ define({
     INSTA_USERNAME_LOCATOR: '//input[@data-reactid=".0.1.0.1.0.1.2.0.0"]',
     INSTA_PW_LOCATOR: '//input[@data-reactid=".0.1.0.1.0.1.2.1.0"]',
     INSTA_LOGIN_BTN_LOCATOR: '//button[@data-reactid=".0.1.0.1.0.1.2.2.0"]',
-    INSTA_PROFILE_LOCATOR: '//a[@data-reactid=".0.2.0.0.1.1.2.0"]'
+    INSTA_PROFILE_LOCATOR: '//a[@data-reactid=".0.2.0.0.1.1.2.0"]',
+    FB_EMAIL_LOCATOR: '//*[@id="email"]',
+    FB_PASSWORD_LOCATOR: '//*[@id="pass"]',
+    FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]'
 });

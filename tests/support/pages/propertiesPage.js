@@ -32,6 +32,9 @@ define({
     INSTA_USERNAME: 'og_instagangsta',
     INSTA_PW: 'h8yst8ck',
     INSTA_URL: 'http://www.instagram.com',
-    INSTA_PROFILE_TEXT: 'Profile'
+    INSTA_PROFILE_TEXT: 'Profile',
+    FACEBOOK_URL: 'https://www.facebook.com',
+    FACEBOOK_EMAIL:  'bkjk100@gmail.com',
+    FACEBOOK_PW: 'Patriots12$'  
 });
 

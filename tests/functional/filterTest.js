@@ -24,7 +24,7 @@ define([
         post3: {post_mod: betaProperties.POST3_MODERATION_LOCATOR, post_icon: betaProperties.POST3_ICON_LOCATOR, post_tag: betaProperties.POST3_TAGGING_LOCATOR, post_close: betaProperties.CLOSE_BTN_LOCATOR}
     };
 
-    bdd.describe('Test moderation & tagging filters', function(){
+    /*bdd.describe('Test moderation & tagging filters', function(){
         bdd.before(function(){
             loginPage = new loginPage(this.remote);
             filterTestPage= new filterTestPage(this.remote);
@@ -48,74 +48,51 @@ define([
             });
         });
 
-        bdd.it('cycle through each post,checking content', function(){
+        bdd.it('post1', function(){
+            return filterTestPage
+                .checkModAndTag(0)
 
-            //var results= filterTestPage.checkMod(0)
-            //var results2 = filterTestPage.checkTag(0)
-            filterTestPage.checkMod(0).then(function(results){
-                //assert.equal(results, 'Approved')
-                if(results=='Approved')
-                {
-                    filterTestPage.checkTag(0).then(function(results1){
-                         assert.equal(results1,'completed')
-                    })
-                }
-                else
-                {
-                     assert.equal(results,'approved')
-                }
-
-            });
-            //assert.equal(filterTestPage.checkMod(0),'Approved')
-            //assert.equal(results2, 'Completed');
-           // return filterTestPage
-                //.checkMod(0)
-                
-                /*.then(function (results) {
-                    //assert.equal(results, 'Approved')
-                    filterTestPage.checkTag(0)
-                            .then(function(resultss){
-                            assert.equal(resultss, 'completed');
-                        })
-                   // assert.equal(results, 'Approved')
-
-                });
-
-               /* .then(function(){filterTestPage.checkTag(0).then(function(results){
-                    assert.equal(results, 'completed');
-                })
-                });*/
-                /*.then(function(){filterTestPage.closeIt(0)
-                })
-
-                .then(function(){filterTestPage.checkMod(1).then(function (results) {
-                    assert.equal(results, 'Approved')
-
-                })})
-
-
-                .then(function(){filterTestPage.checkTag(1).then(function(results){
-                    assert.equal(results, 'Completed');
-                })
-                })
-
-                .then(function(){filterTestPage.checkMod(2).then(function (results) {
-                    assert.equal(results, 'Approved')
-
-                })})
-
-
-                .then(function(){filterTestPage.checkTag(2).then(function(results){
-                    assert.equal(results, 'Completed');
-                })
-                });*/
-
-                /*.then(function (results) {
-                    assert.equal(results, 'Completed');
-                });*/
-                //.closeIt(0);
-            
         });
+        bdd.it('post2', function(){
+            return filterTestPage
+                .checkModAndTag(1)
+
+        });
+
+        bdd.it('post3', function(){
+            return filterTestPage
+                .checkModAndTag(2)
+        });
+
+
+    });*/
+
+    bdd.describe('Testing different filters', function(){
+
+        bdd.before(function(){
+            loginPage = new loginPage(this.remote);
+            filterTestPage= new filterTestPage(this.remote);
+            return loginPage.loginWithIntroCookie();
+        });
+
+        /*bdd.it('set moderation filter to approved', function(){
+            //this.skip;
+            return filterTestPage
+                .changeFilters()
+                .then(function(results){
+                    assert.equal(results,'53');
+                });
+        });*/
+
+        bdd.it('change format and check post1', function(){
+            return filterTestPage
+                .changeFormat()
+                .then(function(results){
+                    assert.equal(results,"Approved");
+                });
+        });
+
+
     });
 
 });

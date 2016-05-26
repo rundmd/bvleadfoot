@@ -9,9 +9,10 @@ define([
     './propertiesPage',
     './betaTabElementsPage',
     'intern/dojo/node!leadfoot/helpers/pollUntil',
+    'intern/chai!assert',
     'require'
     
-], function(keys,utils,elements,properties,betaProperties,pollUntil,require){
+], function(keys,utils,elements,properties,betaProperties,pollUntil,assert,require){
         function filterTestPage(remote){
             this.remote=remote;
         }
@@ -74,7 +75,9 @@ define([
                 
                 .sleep(2000)
                 .findByXpath(betaProperties.RESULTS_COUNT_LOCATOR)
-                .getVisibleText();
+                .getVisibleText()
+            
+                
 
         },
 
@@ -124,7 +127,7 @@ define([
                 .getVisibleText();
         },
         
-        checkMod: function(number){
+        checkModAndTag: function(number){
             var session= this.remote;
             return session
                 .findDisplayedByXpath(VIEWS[number].post_icon)
@@ -135,7 +138,20 @@ define([
                 //.click()
                     .sleep(5000)
                 //.end()
-                .getProperty("innerText")
+                .getProperty("innerText").then(function(results){
+                    assert.equal(results,'Approved')
+                })
+                .sleep(2000)
+                .findDisplayedByXpath(VIEWS[number].post_tag)
+                .sleep(2000)
+                .getProperty("innerText").then(function(results){
+                    assert.equal(results, 'Completed')
+                })
+                .findDisplayedByXpath(VIEWS[number].post_close)
+                    .click()
+                    .sleep(2000)
+                    .end()
+                
         },
         
         checkTag: function(number){
@@ -160,6 +176,85 @@ define([
                     .sleep(2000)
                     .end()
             
+        },
+
+        changeFilters: function(){
+            var session= this.remote;
+            return session
+                .get(betaProperties.CONSOLE_URL)
+                .findByXpath(betaProperties.BETA_TAB_LOCATOR)
+                .click()
+                .sleep(2000)
+                .end()
+                .sleep(5000)
+                .findByXpath(betaProperties.POP_UP_LOCATOR)
+                .click()
+                .sleep(2000)
+                .end()
+                .sleep(2000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .findById('btn-filters')
+                .click()
+                .sleep(2000)
+                .end()
+                .findByXpath(betaProperties.MODERATION_FILTER_LOCATOR)
+                    .click()
+                    .sleep(2000)
+                .then(function(){
+                    session.pressKeys('approved')
+                    return session.pressKeys(keys.RETURN)
+                })
+                .sleep(2000)
+                .then(function(){
+                    session.pressKeys('qdddd')
+                    return session.pressKeys(keys.RETURN)
+                })
+                .sleep(2000)
+                .sleep(2000)
+                .findByXpath(betaProperties.RESULTS_COUNT_LOCATOR)
+                .getVisibleText()
+        },
+
+        changeFormat: function(){
+            var session=this.remote;
+            return session
+                .get(betaProperties.CONSOLE_URL)
+                .findByXpath(betaProperties.BETA_TAB_LOCATOR)
+                .click()
+                .sleep(2000)
+                .end()
+                .sleep(5000)
+                .findByXpath(betaProperties.POP_UP_LOCATOR)
+                .click()
+                .sleep(2000)
+                .end()
+                .sleep(2000)
+                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
+                .findById('btn-filters')
+                .click()
+                .sleep(2000)
+                .end()
+                .findByXpath(betaProperties.MODERATION_FILTER_LOCATOR)
+                .click()
+                .sleep(2000)
+                .then(function(){
+                    session.pressKeys('approved')
+                    return session.pressKeys(keys.RETURN)
+                })
+                .sleep(2000)
+                .then(function(){
+                    session.pressKeys('qdddd')
+                    return session.pressKeys(keys.RETURN)
+                })
+                .setFindTimeout(10000)
+                .findByXpath(betaProperties.FORMAT_BTN_LOCATOR)
+                    .click()
+                    .sleep(2000)
+                    .end()
+                .findByXpath(betaProperties.POST1_MODERATION_VIEWS_LOCATOR)
+                .sleep(2000)
+                .getProperty("innerText")
+
         }
 
     }; return filterTestPage;
