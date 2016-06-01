@@ -81,27 +81,6 @@ define([
         },
 
         instagramLogin: function(session) {
-            // Store the current window handle
-            var winHandleBefore = session.getCurrentWindowHandle();
-
-            // Perform the click operation that opens new window
-
-            session.findByXpath(elements.UPLOAD_INSTA_BTN_LOCATOR).click();
-
-            session.switchToWindow().getCurrentWindowHandle();
-
-            // Switch to new window opened
-            // for(String winHandle : driver.getWindowHandles()){
-            //    driver.switchTo().window(winHandle);
-            //}
-
-            //var windowHandles = session.getAllWindowHandles();
-            //console.log('window handles: ' + str);
-            //console.log('window handles: ' + windowHandles[1]);
-            //windowHandles.forEach( function(winHandle) {
-            //    session.switchToWindow(winHandle);
-            //});
-
             return session
                 .sleep(2000)
                 .findById(elements.INSTA_USERNAME_ID)
@@ -122,7 +101,6 @@ define([
                     .type('testing')
                     .sleep(1000)
                     .end()
-                //.findByXpath('//*[@id="caption"]/div[2]/div[2]/div/div/div/form/div/input')
                 .findByXpath(elements.UPLOAD_NICKNAME_LOCATOR)
                     .click()
                     .type('tester')
@@ -132,7 +110,6 @@ define([
                     .click()
                     .sleep(1000)
                     .end()
-                //.findByXpath('//*[@id="caption"]/div[2]/div[2]/div/div/div/form/button')
                 .findByXpath(elements.UPLOAD_SUBMIT_BTN_LOCATOR)
                     .click()
                     .sleep(2000)

@@ -23,9 +23,7 @@ define([
             return loginPage.logout();
         });
 
-        bdd.beforeEach(function () {
-            //return loginPage.loginWithIntroCookie();
-        });
+        bdd.afterEach(function () {
 
         bdd.it('should filter on lang', function () {
             //this.skip();

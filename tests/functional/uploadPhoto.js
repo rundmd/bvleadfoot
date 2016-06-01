@@ -5,10 +5,9 @@ define([
     '../support/utils',
     '../support/pages/elementsPage',    
     '../support/pages/propertiesPage',
-    '../support/pages/loginPage',
     '../support/pages/uploadPhotoPage',
     'require'
-], function (bdd, assert, Command, utils, elements, properties, loginPage, uploadPhotoPage, require) {
+], function (bdd, assert, Command, utils, elements, properties, uploadPhotoPage, require) {
    
     var uploadPhotoPage;
 
@@ -16,10 +15,6 @@ define([
         bdd.before(function () {
             uploadPhotoPage = new uploadPhotoPage(this.remote);
         });
-
-       // bdd.after(function () {
-         //   return loginPage.logout();
-        //});
 
         bdd.it('should upload a photo', function () {
             return uploadPhotoPage

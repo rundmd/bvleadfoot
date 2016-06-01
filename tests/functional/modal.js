@@ -20,12 +20,8 @@ define([
             return loginPage.login();
         });
 
-       // bdd.after(function () {
-         //   return loginPage.logout();
-        //});
-
         bdd.it('should close the modal', function () {
-            //this.skip();
+            this.skip();
             return modalPage
                 .close();
         });
