@@ -23,6 +23,7 @@ define([
 
             return session
                 .get(properties.SUBMISSION_URL)
+                .setFindTimeout(10000)
                 .findByXpath(elements.UPLOAD_INSTA_BTN_LOCATOR)
                     .click()
                     .then(pollUntil('return document.getElementById("choose");', 10000))

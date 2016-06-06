@@ -28,6 +28,6 @@ define({
     POST3_TAGGING_LOCATOR: '/html/body/div[2]/div/div[2]/div/div/div[2]/div[1]/table/tbody/tr[2]/td/span',
     CLOSE3_BTN_LOCATOR: '/html/body/div[2]/div/div[2]/div/div/div[3]/button',
     //FORMAT_BTN_LOCATOR: '//*[@id="content"]/div/section/div[2]/div[1]/div[2]/div[2]/div/button[1]'
-    FORMAT_BTN_LOCATOR: '//*[@id="content"]/div/section/div[2]/div[1]/div[2]/div[2]/div/button[1]'
+    FORMAT_BTN_LOCATOR: 'id("content")/DIV/SECTION[1]/DIV[2]/DIV[1]/DIV[2]/DIV[2]/DIV[1]/BUTTON[1]/I[1]'
 
 });

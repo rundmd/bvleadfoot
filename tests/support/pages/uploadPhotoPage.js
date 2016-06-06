@@ -8,8 +8,9 @@ define([
         './elementsPage',
         './propertiesPage',
         'intern/dojo/node!leadfoot/helpers/pollUntil',
+    'intern/dojo/node!leadfoot/keys',
         'require'
-    ], function (assert,utils,elements,properties,pollUntil,require,results) {
+    ], function (assert,utils,elements,properties,pollUntil,keys,require,results) {
 	function uploadPhotoPage(remote){
                 this.remote=remote;
 	}
@@ -24,18 +25,28 @@ define([
            var temp= "photo"; 
             return session
                 .get(properties.SUBMISSION_URL)
-		.setFindTimeout(10000)
-		.findById('UploadPhoto')
-                    .type(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
-                    .sleep(2000)
-                    .end()
+		        .setFindTimeout(10000)
+		        //.findById('UploadPhoto')
+                //.findByXpath('//*[@id="index"]/div[2]/div[2]/div/div/div/div/label')
+                //.click()
+               // .end()
+                .findById('UploadPhoto')
+                .sleep(2000)
+                .then(function(){
+                    session.pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
+                    return session.pressKeys(keys.RETURN)
+                })
+                    //.pressKeys(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
+                   // .pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
 
+                    //.sleep(2000)
+                    //.end()
                 .then(function(){
                         return utils.fillUploadFormTest(session,temp);
                     })
                 .setFindTimeout(10000)
 
-		.findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
+		        .findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
                 .getVisibleText() 
 
         }

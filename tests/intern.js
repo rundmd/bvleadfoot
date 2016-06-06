@@ -16,7 +16,6 @@ define({
 	},
 
 	defaultTimeout: 240000,
-
 	// Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce
 	// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
 	// capabilities options specified for an environment will be copied as-is
@@ -29,6 +28,7 @@ define({
 		//	{ browserName: 'firefox', version: '44', os: 'OS X', os_version: 'Yosemite'}, 
 		//	{ browserName: 'chrome', version: '39', platform: ['WINDOWS', 'MAC'] },
 		{ browserName: 'chrome', version: '48', platform: ['MAC'] }
+ 		//{ browserName: 'phantomjs' }
 		//	{ browserName: 'safari', version: '8', platform: 'MAC' }
 		//         { browserName: 'chrome', version: '50', platform: ['MAC'] }
 	],
@@ -64,7 +64,7 @@ define({
 	//functionalSuites: [ 'tests/functional/channelFilter', 'tests/functional/langFilter', /*'tests/functional/multipleFilters'*/ ],
 	// functionalSuites: [ 'tests/functional/langFilter' ],
 	//  functionalSuites: [ 'tests/functional/uploadPhoto' ],
-	functionalSuites: [ 'tests/functional/uploadFacebook' ],
+	functionalSuites: [ 'tests/functional/uploadTestGerman' ],
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
 	excludeInstrumentation: /^(?:tests|node_modules)\//
 

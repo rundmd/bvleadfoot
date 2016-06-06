@@ -23,6 +23,7 @@ define([
                 .get(properties.INSTA_URL)
                 .then(function () {
                 })
+                .setFindTimeout(10000)
                 .findByXpath(elements.INSTA_LOGIN_LINK_LOCATOR)
                     .click()
                     .sleep(2000)
