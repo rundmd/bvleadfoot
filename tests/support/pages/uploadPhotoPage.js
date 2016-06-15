@@ -19,7 +19,7 @@ define([
     uploadPhotoPage.prototype={
         constructor: uploadPhotoPage,
 
-        upload:function()
+        upload:function(theTime)
         {
             var session=this.remote;
            var temp= "photo"; 
@@ -32,17 +32,16 @@ define([
                // .end()
                 .findById('UploadPhoto')
                 .sleep(2000)
-                .then(function(){
-                    session.pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
-                    return session.pressKeys(keys.RETURN)
-                })
+                //.then(function(){
+                .type(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
+
                     //.pressKeys(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
                    // .pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
 
-                    //.sleep(2000)
-                    //.end()
+                    .sleep(2000)
+                    .end()
                 .then(function(){
-                        return utils.fillUploadFormTest(session,temp);
+                        return utils.fillUploadFormTest2(session,temp,theTime);
                     })
                 .setFindTimeout(10000)
 
