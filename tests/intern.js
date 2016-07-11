@@ -37,16 +37,16 @@ define({
 
 	// Name of the tunnel class to use for WebDriver tests.
 	// See <https://theintern.github.io/intern/#option-tunnel> for built-in options
-	//tunnel: 'BrowserStackTunnel',
-	tunnel: 'NullTunnel',
+	tunnel: 'BrowserStackTunnel',
+	//tunnel: 'NullTunnel',
 	//tunnel: 'SauceLabsTunnel',
-	//tunnelOptions: {
+	tunnelOptions: {
 	//    username: 'jakehatesgoonies1',
-	//username: 'drewdimanlig1',
+	username: 'drewdimanlig1',
 	//accessKey: '5616c670-da91-4921-a41f-3245d8c5e487'
-	//accessKey: '7vhcAVtLQRy7UxRJq5Gm'
+	accessKey: '7vhcAVtLQRy7UxRJq5Gm'
 	//    accessKey: 'nFU7hNEkRKaTDzkyJJLy'
-	//},
+	},
 
 	// Configuration options for the module loader; any AMD configuration options supported by the AMD loader in use
 	// can be used here.
