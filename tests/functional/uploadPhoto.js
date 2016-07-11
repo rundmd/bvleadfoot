@@ -14,8 +14,7 @@ define([
     var uploadPhotoPage;
     var checkConsolePage;
 
-    var timestamp=Date.now();
-    var time=timestamp.toString();
+    var timestamp = Date.now().toString();
 
     bdd.describe('Photo Upload', function () {
         bdd.before(function () {
@@ -23,25 +22,22 @@ define([
             checkConsolePage= new checkConsolePage(this.remote);
         });
 
-       // bdd.after(function () {
-         //   return loginPage.logout();
-        //});
-        var time1=time;
+        //var time1=time;
 
         bdd.it('should upload a photo', function () {
             return uploadPhotoPage
-                .upload(time)
+                .upload(timestamp)
                 .then(function (results) {
                     assert.equal(results, properties.UPLOAD_PHOTO_THANK_YOU_MSG);
                 });
         });
 
-        var time2=time1;
+        //var time2=time1;
         bdd.it('make sure post is in console',function(){
             return checkConsolePage
-                .checkUpload(time)
+                .checkUpload(timestamp)
                 .then(function (results) {
-                    assert.include(results,time2, 'it is here');
+                    assert.include(results,timestamp, 'it is here');
                 });
         })
 

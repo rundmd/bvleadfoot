@@ -33,7 +33,7 @@ define([
                 .findById('UploadPhoto')
                 .sleep(2000)
                 //.then(function(){
-                .type(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
+                .type(require.toUrl('../files/BV_background_4_1440x900.png'))
 
                     //.pressKeys(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
                    // .pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
