@@ -1,0 +1,7 @@
+{
+  "name": "submission-regression",
+  "version": "1.0.0",
+  "dependencies": {
+    "intern": ">=3.2.3"
+  }
+}
