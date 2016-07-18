@@ -7,7 +7,7 @@ define({
     USERNAME_LOCATOR: '//*[@id="id_username"]',
     PASSWORD_LOCATOR: '//*[@id="id_password"]',
     USERNAME: 'brendon.kelley@bazaarvoice.com',
-    PASSWORD: '',
+    PASSWORD: 'redsox11',
     SUBMIT_BTN_LOCATOR: '//*[@id="fm-form-login"]/div/button'
 
 

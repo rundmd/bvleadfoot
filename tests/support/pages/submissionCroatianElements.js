@@ -2,7 +2,7 @@
  * Created by brendon.kelley on 6/7/16.
  */
 define({
-    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=hr-hr',
+    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=hr_HR',
     UPLOAD_PHOTO_TEXT: "Prenesite fotografiju",
     UPLOAD_VIDEO_TEXT: "laden Sie ein Video",
     TAKE_PHOTO_TEXT:   "Fotografirajte",

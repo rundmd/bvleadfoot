@@ -2,7 +2,7 @@
  * Created by brendon.kelley on 6/9/16.
  */
 define({
-    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=th-th',
+    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=th_TH',
     UPLOAD_PHOTO_TEXT: "อัปโหลดรูปภาพ",
     UPLOAD_VIDEO_TEXT: "laden Sie ein Video",
     TAKE_PHOTO_TEXT:   "ถ่ายภาพ",

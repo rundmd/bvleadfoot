@@ -2,7 +2,7 @@
  * Created by brendon.kelley on 6/8/16.
  */
 define({
-    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=ms-my',
+    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=ms_MY',
     UPLOAD_PHOTO_TEXT: "Muat naik foto",
     UPLOAD_VIDEO_TEXT: "laden Sie ein Video",
     TAKE_PHOTO_TEXT:   "Ambil foto",

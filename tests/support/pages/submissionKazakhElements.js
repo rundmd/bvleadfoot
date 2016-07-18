@@ -2,7 +2,7 @@
  * Created by brendon.kelley on 6/7/16.
  */
 define({
-    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=kk-kz',
+    SUBMISSION_URL:'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test&locale=kk_KZ',
     UPLOAD_PHOTO_TEXT: "Фотосурет жүктеу",
     UPLOAD_VIDEO_TEXT: "laden Sie ein Video",
     TAKE_PHOTO_TEXT:   "Фотосурет түсіру",
@@ -24,6 +24,5 @@ define({
     RM_LOCATOR: '//*[@id="caption"]/div[2]/div[2]/div/div/div/form/label',
     BACK_BTN_LOCATOR: '//*[@id="caption"]/div[2]/div[1]/header/button',
     SUBMIT_BTN_LOCATOR: '//*[@id="caption"]/div[2]/div[2]/div/div/div/form/button'
-
-
+    
 });

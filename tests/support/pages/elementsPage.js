@@ -51,5 +51,6 @@ define({
     INSTA_PROFILE_LOCATOR: '//a[@data-reactid=".0.2.0.0.1.1.2.0"]',
     FB_EMAIL_LOCATOR: '//*[@id="email"]',
     FB_PASSWORD_LOCATOR: '//*[@id="pass"]',
-    FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]'
+    FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]',
+    UPLOAD_FB_CONTENT_PHOTO: '//*[@id="choose"]/div[2]/div[2]/div/div/div/div/ul/li[9]/img'
 });

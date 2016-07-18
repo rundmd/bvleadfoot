@@ -58,27 +58,85 @@ define([
                     .type(reportProperties.PASSWORD)
                  .end()
                 .findByXpath(reportProperties.SUBMIT_BTN_LOCATOR)
-                 .click()
-                 .sleep(2000)
+                    .click()
+                    .sleep(2000)
                     .end()
                 //.findByXpath(reportProperties.START_MONTH_LOCATOR)
                 .sleep(5000)
                 .findByXpath(reportProperties.START_MONTH_LOCATOR)
                     .click()
                     .sleep(2000)
-                    /*.then(function(){
-                    for(i=0; i<3; i++)
-                    {
-                        session.pressKeys(keys.ARROW_DOWN);
-                    }
-                       // return session.pressKeys(keys.ENTER)
-                    return session.pressKeys(keys.RETURN)
-
-                })*/
-                     .end()
-                .findByXpath('//*[@id="id_start_month"]/option[8]')
+                     //.end()
+                .findByXpath(reportProperties.START_MONTH)
                     .click()
+                    .sleep(2000)
                     .end()
+                    .end()
+                .sleep(2000)
+                .findByXpath(reportProperties.START_DAY_LOCATOR)
+                    .click()
+                    .then(function(){
+                    for(i=0; i<2; i++)
+                    {
+                        session.pressKeys(keys.BACKSPACE);
+                    }
+                    //return session.pressKeys(keys.RETURN)
+                        session.pressKeys(reportProperties.START_DAY);
+                        return session.pressKeys(keys.RETURN)
+
+                    })
+                    .end()
+                .findByXpath(reportProperties.START_YEAR_LOCATOR)
+                    .click()
+                    .then(function(){
+                        for(i=0; i<4; i++)
+                        {
+                            session.pressKeys(keys.BACKSPACE);
+                        }
+
+                        session.pressKeys(reportProperties.START_YEAR);
+                        return session.pressKeys(keys.RETURN)
+
+                    })
+                    .end()
+
+                .findByXpath(reportProperties.END_MONTH_LOCATOR)
+                    .click()
+                    .sleep(2000)
+
+                    .findByXpath(reportProperties.END_MONTH)
+                        .click()
+                        .sleep(2000)
+                        .end()
+                    .end()
+                .sleep(2000)
+                .findByXpath(reportProperties.END_DAY_LOCATOR)
+                    .click()
+                    .then(function(){
+                        for(i=0; i<2; i++)
+                        {
+                            session.pressKeys(keys.BACKSPACE);
+                        }
+                    //return session.pressKeys(keys.RETURN)
+                        session.pressKeys(reportProperties.END_DAY);
+                        return session.pressKeys(keys.RETURN)
+
+                    })
+                    .end()
+                .findByXpath(reportProperties.END_YEAR_LOCATOR)
+                    .click()
+                    .then(function(){
+                        for(i=0; i<4; i++)
+                        {
+                            session.pressKeys(keys.BACKSPACE);
+                        }
+
+                        session.pressKeys(reportProperties.END_YEAR);
+                        return session.pressKeys(keys.RETURN)
+
+                    })
+                    .end()
+
                 .findByXpath(reportProperties.SUBMIT_FILTER_LOCATOR)
                     .click()
                     .end()
@@ -88,52 +146,62 @@ define([
                 
 
         },
-
-        /*setModeration: function(){
-            var session= this.remote;
+        
+        checkTotalCollected: function()
+        {
+            var session=this.remote;
             return session
-                .get(betaProperties.CONSOLE_URL)
-                .findByXpath(betaProperties.BETA_TAB_LOCATOR)
-                .click()
-                .sleep(2000)
-                .end()
-                .findByXpath(betaProperties.POP_UP_LOCATOR)
-                .click()
-                .sleep(2000)
-                .end()
-                .then(pollUntil('return document.getElementById("btn-filters");', 10000))
-                .findById('btn-filters')
-                .click()
-                .sleep(2000)
-                .end()
-                .findByXpath(betaProperties.MODERATION_FILTER_LOCATOR)
-                .click()
-                .end()
-                .then(function(){
-                    for(i=0; i<2; i++)
-                    {
-                        session.pressKeys(keys.ARROW_DOWN);
-                    }
-                    return session.pressKeys(keys.RETURN)
+                .findByXpath(reportProperties.TOTAL_COLLECTED_LOCATOR)
+                .getProperty('innerText')
+            
+            
+        },
+        
+        sentForBvMod: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.SENT_FOR_BV_MOD_LOCATOR)
+                .getProperty('innerText')
+            
+        },
+        
+        bvModApproved: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.BV_MOD_APPROVED_LOCATOR)
+                .getProperty('innerText')
+        
+        },
+        
+        manApproved: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.MANUALLY_APPROVED_LOCATOR)
+                .getProperty('innerText')
+        },
 
-                })
-                .then(function(){
-                    for(i=0; i<2; i++)
-                    {
-                        session.pressKeys(keys.ARROW_DOWN);
-                    }
-                    return session.pressKeys(keys.RETURN)
+        bvProductTagged: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.BV_PRODUCT_TAGGED_LOCATOR)
+                .getProperty('innerText')
+        },
 
-                })
+        sentForRm: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.SENT_FOR_RM_LOCATOR)
+                .getProperty('innerText')
+        },
 
-
-                .sleep(2000)
-                .findByXpath(betaProperties.RESULTS_COUNT_LOCATOR)
-                .getVisibleText()
-
-
-
-        },*/
+        rmApproved: function(){
+            var session=this.remote;
+            return session
+                .findByXpath(reportProperties.RM_APPROVE_LOCATOR)
+                .getProperty('innerText')
+        }
+        
+        
 
         
 
