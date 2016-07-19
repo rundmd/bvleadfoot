@@ -30,9 +30,10 @@ define([
     var ObjectId = require('mongodb').ObjectID;
     var url = 'mongodb://localhost:27017';*/
     var MongoClient = require('intern/dojo/node!mongodb').MongoClient;
+    //var Db = require('mongodb').Db;
     //var assert = require('assert');
     var ObjectId = require('intern/dojo/node!mongodb').ObjectID;
-    var url = 'mongodb://localhost:27017';
+    var url = 'mongodb://localhost:27017/test';
     var aggregateRestaurants = function(db, callback) {
         db.collection('testTest').aggregate(
             [
@@ -47,22 +48,43 @@ define([
     var testing;
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-         tom=db.collection('testTest').aggregate(
+         /*tom=db.collection('testTest').aggregate(
             [
                 { $group: { "_id": "$team", "count": { $sum: 1 } } }
             ]).toArray(function(err, result) {
             assert.equal(err, null);
             //console.log(result);
              testing=result;
-        });
+        });*/
+        //tom= db.collection('testTest').find({"$name": "Brendon"});
+        //tom=db.getCollection('testTest').find();
+        //testing=tom.next();
 
+
+
+        /*db.collection('testTest').find({"$name": "Brendon"}).toArray(function(err, docs) {
+            console.log("Printing docs from Array")
+            docs.forEach(function(doc) {
+                console.log("Doc from Array ");
+                console.dir(doc);
+                testing=doc;
+            });
+        });*/
+
+
+        var bk="Brendon"
+        db.collection('testTest').find({ "name": bk }).toArray(function(err, docs) {
+            docs.forEach(function(doc) {
+                testing=doc;
+            });
+        });
         db.close();
 
     });
-    bdd.describe('Test moderation & tagging filters', function(testing){
+    bdd.describe('Test moderation & tagging filters', function(){
         bdd.before(function(){
             testTestPage=new testTestPage(this.remote);
-            console.log(testing)
+            console.log(testing["city"])
         });
 
 
