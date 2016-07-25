@@ -82,12 +82,19 @@ define([
           .getVisibleText()
       },
 
-
       getPropertyByXpath: function (session,locator,property) {
         return session
           .findByXpath(locator)
           .sleep(2000)
           .getProperty(property)
+      },
+
+      clickAButtonByXapth: function(session, locator){
+        return session
+          .findByXpath(locator)
+            .click()
+            .sleep(1000)
+            .end()
       }
 
     }
