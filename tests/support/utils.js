@@ -1,9 +1,11 @@
 define([
+    'intern/chai!assert',
     'intern/dojo/node!leadfoot/keys',
     './pages/elementsPage',
     './pages/propertiesPage',
+    'intern/dojo/node!mongodb',
     'require'    
-], function(keys, elements, properties, require) {
+], function(assert, keys, elements, properties, mongodb, require) {
     return {
         addFilter: function(session, filter) {
             console.log('going to add filter');

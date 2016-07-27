@@ -22,8 +22,6 @@ define([
             checkConsolePage= new checkConsolePage(this.remote);
         });
 
-        //var time1=time;
-
         bdd.it('should upload a photo', function () {
             return uploadPhotoPage
                 .upload(timestamp)
@@ -32,8 +30,7 @@ define([
                 });
         });
 
-        //var time2=time1;
-        bdd.it('make sure post is in console',function(){
+        bdd.it('make sure post is in console', function () {
             return checkConsolePage
                 .checkUpload(timestamp)
                 .then(function (results) {

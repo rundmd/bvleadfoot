@@ -29,14 +29,18 @@ define({
     MODAL_TEXT2_LOCATOR: '//p[@data-reactid=".1.1.0.0.$=11.0.1.0.1"]',
     MODAL_TEXT3_LOCATOR: '//p[@data-reactid=".1.1.0.0.$=11.0.2.0.1"]',
     UPLOAD_PHOTO_BTN_ID: 'UploadPhoto',
+    UPLOAD_PHOTO_BTN_LOCATOR: '//*[@data-reactid=".0.1.1.0.0.0.1.0"]',
+    TAKE_A_PHOTO_BTN_LOCATOR: '//*[@data-reactid=".0.1.1.0.0.0.1.1"]',
     UPLOAD_PHOTO_COMMENT_LOCATOR: '//textarea[@data-reactid=".0.1.1.0.0.0.1.0.1"]',
     UPLOAD_VIDEO_COMMENT_LOCATOR: '//textarea[@data-reactid=".0.1.1.0.0.0.1.0.2"]',
     UPLOAD_NICKNAME_LOCATOR: '//input[@data-reactid=".0.1.1.0.0.0.1.0.2"]',
     UPLOAD_VIDEO_NICKNAME_LOCATOR: '//input[@data-reactid=".0.1.1.0.0.0.1.0.3"]',
     UPLOAD_TC_ID: 'check',
+    UPLOAD_TC_TEXT: '//*[@data-reactid=".0.1.1.0.0.0.1.1.1"]',
     UPLOAD_SUBMIT_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.2"]',
-    UPLOAD_VIDEO_BTN_LOCATOR: '//*[@id="index"]/div[2]/div[2]/div/div/div/div/button[2]',
+    UPLOAD_VIDEO_BTN_LOCATOR: '//*[@data-reactid=".0.1.1.0.0.0.1.2"]',
     UPLOAD_VIDEO_BTN_LOCATOR2: '//*[@id="app-wrapper"]/div/div[2]/div[2]/div/div/div/form/div/label/input',
+    UPLOAD_VIDEO_BTN2_LOCATOR: '//*[@data-reactid=".0.1.1.0.0.0.1.0.0"]',
     UPLOAD_INSTA_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.4"]',
     UPLOAD_FB_BTN_LOCATOR: '//button[@data-reactid=".0.1.1.0.0.0.1.3"]',
     INSTA_USERNAME_ID: 'id_username',
@@ -51,5 +55,6 @@ define({
     INSTA_PROFILE_LOCATOR: '//a[@data-reactid=".0.2.0.0.1.1.2.0"]',
     FB_EMAIL_LOCATOR: '//*[@id="email"]',
     FB_PASSWORD_LOCATOR: '//*[@id="pass"]',
-    FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]'
+    FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]',
+    UPLOAD_BACK_BTN: '//*[@data-reactid=".0.1.0.0.0.1"]'
 });

@@ -5,50 +5,40 @@
 define([
     'intern/chai!assert',
     '../utils',
-        './elementsPage',
-        './propertiesPage',
-        'intern/dojo/node!leadfoot/helpers/pollUntil',
+    './elementsPage',
+    './propertiesPage',
+    'intern/dojo/node!leadfoot/helpers/pollUntil',
     'intern/dojo/node!leadfoot/keys',
-        'require'
-    ], function (assert,utils,elements,properties,pollUntil,keys,require,results) {
+    'intern/dojo/node!mongodb',
+    'require'
+    ], function (assert, utils, elements, properties, pollUntil, keys, mongodb, require) {
 	function uploadPhotoPage(remote){
-                this.remote=remote;
+      this.remote = remote;
 	}
    
-
     uploadPhotoPage.prototype={
-        constructor: uploadPhotoPage,
+      constructor: uploadPhotoPage,
+        
+       upload: function(timestamp) {
+         var session = this.remote;
+         var submissionType = 'photo';
+         
+         return session
+           .get(properties.SUBMISSION_URL)
+		   .setFindTimeout(10000)
+           .findById('UploadPhoto')
+             .type(require.toUrl('..' + properties.PHOTO_UPLOAD_LOCATION))
+             .sleep(2000)
+             .end()
+           .then(function(){
+             return utils.fillUploadFormTest2(session, submissionType, timestamp);
+           })
+           .setFindTimeout(10000)
+		   .findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
+           .getVisibleText(); 
+      }
 
-        upload:function(theTime)
-        {
-            var session=this.remote;
-           var temp= "photo"; 
-            return session
-                .get(properties.SUBMISSION_URL)
-		        .setFindTimeout(10000)
-		        //.findById('UploadPhoto')
-                //.findByXpath('//*[@id="index"]/div[2]/div[2]/div/div/div/div/label')
-                //.click()
-               // .end()
-                .findById('UploadPhoto')
-                .sleep(2000)
-                //.then(function(){
-                .type(require.toUrl('../files/BV_background_4_1440x900.png'))
+    }; 
 
-                    //.pressKeys(require.toUrl('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png'))
-                   // .pressKeys('/Users/brendon.kelley/projects/bvleadfoot/tests/support/pages/BV_background_4_1440x900.png')
-
-                    .sleep(2000)
-                    .end()
-                .then(function(){
-                        return utils.fillUploadFormTest2(session,temp,theTime);
-                    })
-                .setFindTimeout(10000)
-
-		        .findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
-                .getVisibleText() 
-
-        }
-
-    }; return uploadPhotoPage
+    return uploadPhotoPage;
 });
