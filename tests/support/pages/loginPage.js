@@ -2,8 +2,9 @@ define([
     '../utils', 
     './elementsPage', 
     './propertiesPage', 
+    './common/actionsPage',
     'require'
-], function (utils, elementsPage, properties, require) {
+], function (utils, elementsPage, properties, actions, require) {
  
    function loginPage(remote) {
         this.remote = remote;
@@ -12,30 +13,26 @@ define([
     loginPage.prototype = {
         constructor: loginPage,
 
-        login: function () {
+        login: function (CONSOLE_URL) {
             console.log('no cookie');
+            console.log('console url: ', CONSOLE_URL);           
+            if (typeof CONSOLE_URL === 'undefined' || CONSOLE_URL == null) {
+              CONSOLE_URL = properties.CONSOLE_URL;
+            }
+
+            console.log('console url2: ', CONSOLE_URL);           
             var session = this.remote;
             return session
-                .get(properties.CONSOLE_URL)
-                .then(function () {
+                .get(CONSOLE_URL)
+                .then( function () {
+                  return actions.enterText(session, elementsPage.USERNAME_INPUT_ID, properties.USERNAME, 'id');
                 })
-                .findById(elementsPage.USERNAME_INPUT_ID)
-                    .click()
-                    .type(properties.USERNAME)
-                    .end()
-                .findById(elementsPage.PASSWORD_INPUT_ID)
-                    .click()
-                    .type(properties.PASSWORD)
-                    .end()
-                .findByCssSelector(elementsPage.LOGIN_BTN_LOCATOR)
-                    .click()
-                    .end()
-                    .sleep(2000);
-                //.findByCssSelector(elementsPage.PROFILE_LINK_LOCATOR)
-                //.getVisibleText()
-                //.then(function (text) {
-                //    return text;;
-                //});
+                .then( function () {
+                  return actions.enterText(session, elementsPage.PASSWORD_INPUT_ID, properties.PASSWORD, 'id');
+                })
+                .then( function () {
+                  return actions.clickButton(session, elementsPage.LOGIN_BTN_LOCATOR, 'xpath');
+                });
         },
 
         loginWithIntroCookie: function () {
@@ -58,13 +55,7 @@ define([
                     .click()
                     .end()
                     .sleep(2000);
-                //.findByCssSelector(elementsPage.PROFILE_LINK_LOCATOR)
-                //.getVisibleText()
-                //.then(function (text) {
-                //    return text;;
-                //});
         },
-
 
         logout: function () {
             var session = this.remote;

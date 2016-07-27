@@ -7,12 +7,15 @@ define([
   './elementsPage',
   './propertiesPage',
   './consoleElementsPage',
+  './common/actionsPage',
+  './loginPage',
   'intern/dojo/node!leadfoot/helpers/pollUntil',
   'intern/dojo/node!leadfoot/keys',
   'require'
-], function (assert, utils, elements, properties, consoleElements, pollUntil, keys, require) {
+], function (assert, utils, elements, properties, consoleElements, actions, loginPage, pollUntil, keys, require) {
   function checkConsolePage(remote) {
     this.remote = remote;
+    var loginPage;
   }
  
   checkConsolePage.prototype = {
@@ -20,22 +23,12 @@ define([
 
     checkUpload: function (timestamp) {
       var session = this.remote;
+      loginPage = new loginPage(session);
       return session
-        .get(consoleElements.SUBMISSION_URL)
-        .setFindTimeout(10000)
-        .findByXpath(consoleElements.USERNAME_LOCATOR)
-          .click()
-          .type(properties.USERNAME)
-          .end()
-        .findByXpath(consoleElements.PASSWORD_LOCATOR)
-          .click()
-          .type(properties.PASSWORD)
-          .end()
-        .findByXpath(consoleElements.SUBMIT_BTN_LOCATOR)
-          .click()
-          //.sleep(2000)
-          .end()
-        .then(pollUntil('return document.getElementById("js-new-update-bar");', 5000))
+        .then( function () {
+          return loginPage.login(consoleElements.SUBMISSION_URL);
+        })
+        .then( pollUntil('return document.getElementById("js-new-update-bar");', 5000) )
         .getPageSource()
         .then( function (results) {
           assert.include(results, timestamp);

@@ -96,18 +96,14 @@ define([
         .then( function () {
           return actions.enterTextByXpath(session, comment, theTime);
         })
-        //.findByXpath(comment)
-        //  .type(theTime)
-        //  .sleep(1000)
-        //  .end()
         .then( function () {
-          return actions.enterTextByXpath(session, nickname, theTime);
+          return actions.enterText(session, nickname, theTime, 'xpath');
         })
         .then( function () {
-          return actions.selectCheckBoxById(session, elements.UPLOAD_TC_ID);
+          return actions.selectCheckBox(session, elements.UPLOAD_TC_ID, 'id');
         })
         .then( function () {
-          return actions.clickButtonByXpath(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR);
+          return actions.clickButton(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR, 'xpath');
         })
         .sleep(2000);
 

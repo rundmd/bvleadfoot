@@ -1,6 +1,3 @@
-/**
- * Created by brendon.kelley on 7/20/16.
- */
 define([
   'intern/dojo/node!leadfoot/keys',
   '../elementsPage',
@@ -8,6 +5,56 @@ define([
   'require'
 ], function(keys, elements, properties,require) {
   return {
+    uploadFile: function(session, locator, file, type) {
+      if ( type == 'id') {
+        return this.uploadFileById(session, locator, file);
+      } else if ( type == 'xpath') {
+        return this.uploadFileByXpath(session, locator, file);
+      }
+    },
+
+    clickButton: function(session, locator, type) {
+      if ( type == 'xpath' ) {
+        return this.clickButtonByXpath(session, locator);
+      } else if (type == 'id') {
+        return this.clickButtonById(session, locator);
+      }
+    },
+
+    enterText: function(session, locator, text, type) {
+      if (type == 'xpath') {
+        return this.enterTextByXpath(session, locator, text);
+      } else if (type == 'id') {
+        return this.enterTextById(session, locator, text);
+      } else if (type == 'class') {
+        return this.enterTextByClass(session, locator, text);
+      }
+    },
+
+    clearTextBox: function(session, locator, num, type) {
+      if (type == 'xpath') {
+        return this.clearTextBoxByXpath(session, locator, num);
+      } else if (type == 'id') {
+        return this.clearTextBoxById(session, locator, num);
+      }
+    },
+
+    getText: function(session, locator, type) {
+      if (type == 'xpath') {
+        return this.getTextByXpath(session, locator);
+      } else if (type == 'id') {
+        return this.getTextById(session, locator);
+      }
+    },
+
+    selectCheckBox: function(session, locator, type) {
+      if (type == 'xpath') {
+        return this.selectCheckBoxByXpath(session, locator);
+      } else if (type == 'id') {
+        return this.selectCheckBoxById(session, locator);
+      }
+    },
+  
     enterTextByXpath: function (session, locator, text) {
       return session
         .findByXpath(locator)
@@ -65,9 +112,15 @@ define([
         });
     },
 
-    getElementTextByXpath: function (session, locator) {
+    getTextByXpath: function (session, locator) {
       return session
         .findByXpath(locator)
+          .getVisibleText();
+    },
+
+    getTextById: function (session, locator) {
+      return session
+        .findById(locator)
           .getVisibleText();
     },
 
@@ -98,9 +151,23 @@ define([
         .end();
     },
 
+    clickButtonById: function (session, locator) {
+      return session
+        .findById(locator)
+        .click()
+        .end();
+    },
+
     selectCheckBoxById: function (session, locator) {
       return session
         .findById(locator)
+          .click()
+          .end();
+    },
+
+    selectCheckBoxByXpath: function (session, locator) {
+      return session
+        .findByXpath(locator)
           .click()
           .end();
     }

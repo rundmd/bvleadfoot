@@ -4,7 +4,8 @@ define({
     FILTER_BTN_ID: 'btn-filters',
     USERNAME_INPUT_ID: 'id_username',
     PASSWORD_INPUT_ID: 'id_password',
-    LOGIN_BTN_LOCATOR: '#fm-form-login > * > button',
+   //LOGIN_BTN_LOCATOR: '#fm-form-login > * > button',
+    LOGIN_BTN_LOCATOR: '//*[@id="fm-form-login"]/div/button',
     PROFILE_LINK_LOCATOR: '#top-bar > *.my_profile > a',
     CHANNEL_FILTER_LOCATOR: '//*[@data-reactid=".0.1.0.0.1.0.0.1:$channels.1"]',
     LANG_FILTER_LOCATOR: '//*[@data-reactid=".0.1.0.0.1.0.0.1:$languages.1"]',
@@ -56,5 +57,6 @@ define({
     FB_EMAIL_LOCATOR: '//*[@id="email"]',
     FB_PASSWORD_LOCATOR: '//*[@id="pass"]',
     FB_LOGIN_BTN_LOCATOR: '//*[@id="loginbutton"]',
-    UPLOAD_BACK_BTN: '//*[@data-reactid=".0.1.0.0.0.1"]'
+    UPLOAD_BACK_BTN: '//*[@data-reactid=".0.1.0.0.0.1"]',
+    UPLOAD_THANK_YOU_MESSAGE_LOCATOR: '//*[@data-reactid=".0.1.1.0.0.0.1"]'
 });

@@ -7,11 +7,12 @@ define([
     '../utils',
     './elementsPage',
     './propertiesPage',
+    './common/actionsPage',
     'intern/dojo/node!leadfoot/helpers/pollUntil',
     'intern/dojo/node!leadfoot/keys',
     'intern/dojo/node!mongodb',
     'require'
-    ], function (assert, utils, elements, properties, pollUntil, keys, mongodb, require) {
+    ], function (assert, utils, elements, properties, actions, pollUntil, keys, mongodb, require) {
 	function uploadPhotoPage(remote){
       this.remote = remote;
 	}
@@ -26,16 +27,15 @@ define([
          return session
            .get(properties.SUBMISSION_URL)
 		   .setFindTimeout(10000)
-           .findById('UploadPhoto')
-             .type(require.toUrl('..' + properties.PHOTO_UPLOAD_LOCATION))
-             .sleep(2000)
-             .end()
-           .then(function(){
+           .then( function () {
+             return actions.uploadFile(session, elements.UPLOAD_PHOTO_BTN_ID, properties.PHOTO_UPLOAD_LOCATION, 'id');
+           })
+           .then( function () {
              return utils.fillUploadForm(session, submissionType, timestamp);
            })
-           .setFindTimeout(10000)
-		   .findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
-           .getVisibleText()
+           .then( function () {
+             return actions.getText(session, elements.UPLOAD_THANK_YOU_MESSAGE_LOCATOR, 'xpath');
+           })
            .then( function (results) {
              assert.equal(results, properties.UPLOAD_PHOTO_THANK_YOU_MSG);
            });

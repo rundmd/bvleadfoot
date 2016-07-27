@@ -21,19 +21,19 @@ define([
         .get(localeInfo.submissionUrl)
         .sleep(2000)
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_PHOTO_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_PHOTO_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.uploadPhotoText);
             });
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.TAKE_A_PHOTO_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.TAKE_A_PHOTO_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.takePhotoText);
             });
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_VIDEO_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_VIDEO_BTN_LOCATOR)
             .then( function (results) {
             /*
              * This assertion is broken until 'Upload a video' translation is fixed
@@ -42,13 +42,13 @@ define([
             });
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_FB_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_FB_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.uploadFacebookText);
             });
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_INSTA_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_INSTA_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.uploadInstagramText);
             });
@@ -93,13 +93,13 @@ define([
           return actions.selectCheckBoxById(session, elements.UPLOAD_TC_ID);
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.postBtnText);
             });
         })
         .then(function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_BACK_BTN)
+          return actions.getTextByXpath(session, elements.UPLOAD_BACK_BTN)
             .then(function (results) {
               assert.equal(results, localeInfo.backBtnText);
             });
@@ -148,13 +148,13 @@ define([
           return actions.selectCheckBoxById(session, elements.UPLOAD_TC_ID);
         })
         .then( function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR)
+          return actions.getTextByXpath(session, elements.UPLOAD_SUBMIT_BTN_LOCATOR)
             .then( function (results) {
               assert.equal(results, localeInfo.postBtnText);
             });
         })
         .then(function () {
-          return actions.getElementTextByXpath(session, elements.UPLOAD_BACK_BTN)
+          return actions.getTextByXpath(session, elements.UPLOAD_BACK_BTN)
             .then(function (results) {
               assert.equal(results, localeInfo.backBtnText);
             });
