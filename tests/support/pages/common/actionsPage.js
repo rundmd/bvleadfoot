@@ -12,14 +12,16 @@ define([
       return session
         .findByXpath(locator)
           .click()
-          .pressKeys(text);
+          .pressKeys(text)
+          .end();
     },
 
     enterTextById: function (session, locator, text) {
       return session
         .findById(locator)
           .click()
-          .pressKeys(text);
+          .pressKeys(text)
+          .end();
     },
 
     enterTextByClass: function (session, locator, text) {
@@ -78,19 +80,29 @@ define([
     uploadFileById: function (session, locator, file) {
       return session
         .findById(locator)
-          .type(require.toUrl('../..' + file));
+          .type(require.toUrl('../..' + file))
+          .end();
     },
 
     uploadFileByXpath: function (session, locator, file) {
       return session
         .findByXpath(locator)
-          .type(require.toUrl('../..' + file));
+          .type(require.toUrl('../..' + file))
+          .end();
+    },
+
+    clickButtonByXpath: function (session, locator) {
+      return session
+        .findByXpath(locator)
+        .click()
+        .end();
     },
 
     selectCheckBoxById: function (session, locator) {
       return session
         .findById(locator)
-          .click();
+          .click()
+          .end();
     }
 
   }

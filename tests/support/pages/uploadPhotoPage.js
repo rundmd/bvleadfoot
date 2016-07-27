@@ -31,11 +31,14 @@ define([
              .sleep(2000)
              .end()
            .then(function(){
-             return utils.fillUploadFormTest2(session, submissionType, timestamp);
+             return utils.fillUploadForm(session, submissionType, timestamp);
            })
            .setFindTimeout(10000)
 		   .findByXpath('//*[@id="thanks"]/div[2]/div[2]/div/div/div/p')
-           .getVisibleText(); 
+           .getVisibleText()
+           .then( function (results) {
+             assert.equal(results, properties.UPLOAD_PHOTO_THANK_YOU_MSG);
+           });
       }
 
     }; 

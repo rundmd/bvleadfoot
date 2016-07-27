@@ -7,10 +7,10 @@ define([
 ], function(assert, keys, elements, mongodb, require) {
   return {
     dbConnect: function() {
-          var MongoClient = mongodb.MongoClient;
-          var mongoUrl = 'mongodb://localhost:27017/qa';
-          return MongoClient.connect(mongoUrl);
-        },
+      var MongoClient = mongodb.MongoClient;
+      var mongoUrl = 'mongodb://localhost:27017/qa';
+        return MongoClient.connect(mongoUrl);
+    },
 
     getLocaleText: function(db, locales) {
       if (typeof locales === 'undefined' || locales == null) {
