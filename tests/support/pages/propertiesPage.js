@@ -1,5 +1,5 @@
 define({
-  /* General Properties */
+  // General Properties 
   CONSOLE_URL: 'http://pippin.feedmagnet.com',
   SUBMISSION_URL: 'https://submit-stg.curations.bazaarvoice.com/?client=curations-one&productId=product1&group=pie-test',
   SEARCH_URL: '/?next=/beta_tab/',
@@ -9,10 +9,10 @@ define({
   FILTER_TIMEOUT: 7000,
   COMBINATION_FILTER_TIMEOUT: 2000,
   DEFAULT_FILTER_RESULTS: '21692',
-  /* Channel Filter Properties */
+  // Channel Filter Properties 
   CHANNEL_FILTER_RESULTS: '12',
   MULTI_CHANNEL_FILTER_RESULTS: '14',
-  /* Language Filter Properties */
+  // Language Filter Properties 
   LANG_FILTER_RESULTS: '106',
   MULTI_LANG_FILTER_RESULTS: '356',
   COMBINATION1_FILTER_RESULTS: 30,
@@ -32,6 +32,9 @@ define({
   INSTA_PROFILE_TEXT: 'Profile',
   FACEBOOK_URL: 'https://www.facebook.com',
   FACEBOOK_EMAIL:  'bkjk100@gmail.com',
-  FACEBOOK_PW: 'Patriots12$'  
+  FACEBOOK_PW: 'Patriots12$',
+  // Mongodb settings   
+  MONGO_LOCAL_HOST: 'localhost:27017/qa',
+  MONGO_QA_HOST: 'ip-10-100-39-155.qa.us-east-1.nexus:27017/qa'
 });
 

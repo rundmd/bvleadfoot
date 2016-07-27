@@ -12,7 +12,12 @@ define([
 ], function(intern, bdd, assert, Command, utils, dbUtils, properties, elements, uploadTranslationTestPage, require){
 
   var uploadTranslationTestPage;
-  dbUtils.dbConnect().then(function (db) {
+  var ENV = intern.args.env;
+
+  if (typeof ENV !== 'undefined') {
+    ENV = ENV.toLowerCase();
+  }
+  dbUtils.dbConnect(ENV).then(function (db) {
     dbUtils.getLocaleText(db, intern.args.locales).then(function (docs) {
       bdd.describe('test submission app translations', function (){
         bdd.before(function(){

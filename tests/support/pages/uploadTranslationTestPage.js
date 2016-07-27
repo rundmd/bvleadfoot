@@ -116,7 +116,7 @@ define([
           .sleep(2000)
           .end()
         .then( function () {
-          return actions.uploadFileByXpath(session, elements.UPLOAD_VIDEO_BTN_LOCATOR2, properties.PHOTO_UPLOAD_LOCATION);
+          return actions.uploadFileByXpath(session, elements.UPLOAD_VIDEO_BTN_LOCATOR2, properties.VIDEO_UPLOAD_LOCATION);
          })
          .then( function () {
            return actions.getPropertyByXpath(session, elements.UPLOAD_VIDEO_COMMENT_LOCATOR, 'placeholder')
