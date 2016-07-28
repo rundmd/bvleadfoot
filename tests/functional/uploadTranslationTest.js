@@ -14,6 +14,10 @@ define([
   var uploadTranslationTestPage;
   var ENV = intern.args.env;
 
+  //var db = monk(properties.MONGO_LOCAL_HOST, function(err) {
+  //  if (err) console.error(err);
+  //});
+
   if (typeof ENV !== 'undefined') {
     ENV = ENV.toLowerCase();
   }

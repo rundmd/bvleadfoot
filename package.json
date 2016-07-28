@@ -2,6 +2,7 @@
   "name": "submission-regression",
   "version": "1.0.0",
   "dependencies": {
-    "intern": ">=3.2.3"
+    "intern": ">=3.2.3",
+    "monk": "^3.1.0"
   }
 }
