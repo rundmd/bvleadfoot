@@ -2,230 +2,195 @@
  * Created by brendon.kelley on 7/20/16.
  */
 define([
-  'intern/dojo/node!leadfoot/keys',
-  './pages/elementsPage',
-  './pages/propertiesPage',
-  'require'
+    'intern/dojo/node!leadfoot/keys',
+    './pages/elementsPage',
+    './pages/propertiesPage',
+    'require'
 ], function(keys, elements, properties,require) {
-  return {
+    return {
 
-    uploadAFile: function(session, locator, file, type) {
-      if( type=='id') {
-        return this.uploadAFileById(session, locator, file);
-      }
-      else if( type=='xpath') {
-        return this.uploadAFileByXpath(session, locator, file);
-      }
-    },
+      uploadAFile: function(session, locator, file, type) {
+        if( type=='id') {
+          return this.uploadAFileById(session, locator, file);
+        }
+        else if( type=='xpath') {
+          return this.uploadAFileByXpath(session, locator, file);
+        }
+      },
 
-    clickAButton: function(session, locator, type) {
-      if( type=='xpath' ) {
-        return this.clickAButtonByXapth(session, locator);
-      }
-      else if(type=='id') {
-        return this.clickAButtonById(session, locator);
-      }
-    },
+      clickAButtonBy: function(session, locator, type) {
+        if( type=='xpath' ) {
+          return this.clickAButtonByXapth(session, locator);
+        }
+        else if(type=='id') {
+          return this.clickAButtonById(session, locator);
+        }
+      },
 
-    enterText: function(session, locator, text, type) {
-      if(type=='xpath') {
-        return this.enterTextByXpath(session, locator, text);
-      }
-      else if(type=='id') {
-        return this.enterTextById(session, locator, text);
-      }
-      else if(type=='class') {
-        return this.enterTextByClass(session, locator, text);
-      }
-    },
+      enterText: function(session, locator, text, type) {
+        if(type=='xpath') {
+          return this.enterTextByXpath(session, locator, text);
+        }
+        else if(type=='id') {
+          return this.enterTextById(session, locator, text);
+        }
+        else if(type=='class') {
+          return this.enterTextByClass(session, locator, text);
+        }
+      },
 
-    enterTextAndEnter: function(session, locator, text, type) {
-      if(type=='xpath') {
-        return this.enterTextAndEnterByXpath(session, locator, text);
-      }
-      else if(type=='id') {
-        return this.enterTextAndEnterById(session, locator, text);
-      }
-      else if(type=='class') {
-        return this.enterTextAndEnterByClass(session, locator, text);
-      }
-    },
+      clearTextBox: function(session, locator, num, type) {
+        if(type=='xpath') {
+          return this.clearTextBoxByXpath(session, locator, num);
+        }
+        else if(type=='id') {
+          return this.clearTextBoxById(session, locator, num);
+        }
+      },
 
-    clearTextBox: function(session, locator, num, type) {
-      if(type=='xpath') {
-        return this.clearTextBoxByXpath(session, locator, num);
-      }
-      else if(type=='id') {
-        return this.clearTextBoxById(session, locator, num);
-      }
-    },
-
-    getText: function(session, locator, type) {
-      if(type=='xpath') {
-        return this.getTextByXpath(session, locator);
-      }
-      else if(type=='id') {
-        return this.getTextById(session, locator);
-      }
-    },
+      getText: function(session, locator, type) {
+        if(type=='xpath') {
+          return this.getTextByXpath(session, locator);
+        }
+        else if(type=='id') {
+          return this.getTextById(session, locator);
+        }
+      },
 
 
-    enterTextByXpath: function (session, locator, text) {
-      return session
-        .findByXpath(locator)
-        .click()
-        .sleep(2000)
-        .pressKeys(text)
-    },
+      enterTextByXpath: function (session, locator, text) {
+          return session
+            .findByXpath(locator)
+              .click()
+              .sleep(2000)
+            .then( function () {
+              session.pressKeys(text)
+              return session.pressKeys(keys.RETURN)
+            })
+        },
 
-    enterTextById: function (session, locator, text) {
-      return session
+        enterTextById: function (session, locator, text) {
+          return session
+            .findById(locator)
+              .click()
+              .sleep(2000)
+            .then( function () {
+              session.pressKeys(text)
+              return session.pressKeys(keys.RETURN)
+            })
+        },
+
+      enterTextByClass: function (session, locator, text) {
+        return session
+            .findByClassName(locator)
+              .click()
+              .sleep(2000)
+          .then( function () {
+            session.pressKeys(text)
+            return session.pressKeys(keys.RETURN)
+          })
+      },
+
+      dropDownMenuXpathOptionInput: function (session, locator, option) {
+        return session
+          .findByXpath(locator)
+            .click()
+            .findByXpath(option)
+              .click()
+              .end()
+            .end()
+      },
+
+      dropDownMenuXpathSelectInput: function (session, locator, num) {
+        return session
+          .findByXpath(locator)
+            .click()
+            .end()
+        .then( function () {
+          for( i=0; i<num; i++ ) {
+            session.pressKeys(keys.ARROW_DOWN);
+          }
+          return session.pressKeys(keys.RETURN)
+        })
+      },
+      
+      clearTextBoxByXpath: function (session, locator, num) {
+        return session
+          .findByXpath(locator)
+            .click()
+        .then( function () {
+          for(i = 0; i < num; i++){
+            session.pressKeys(keys.BACKSPACE);
+          }
+        })
+      },
+
+      clearTextBoxById: function (session, locator, num) {
+        return session
         .findById(locator)
         .click()
-        .sleep(2000)
-        .pressKeys(text)
-    },
-
-    enterTextByClass: function (session, locator, text) {
-      return session
-        .findByClassName(locator)
-        .click()
-        .sleep(2000)
-        .pressKeys(text)
-    },
-
-    enterTextAndEnterByXpath: function (session, locator, text) {
-      return session
-        .findByXpath(locator)
-        .click()
-        .sleep(2000)
         .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
+          for(i = 0; i < num; i++){
+            session.pressKeys(keys.BACKSPACE);
+          }
         })
-    },
+      },
 
-    enterTextAndEnterById: function (session, locator, text) {
-      return session
-        .findById(locator)
-        .click()
-        .sleep(2000)
-        .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
-        })
-    },
+      getTextByXpath: function (session, locator) {
+        return session
+          .findByXpath(locator)
+          .sleep(2000)
+          .getVisibleText()
+      },
 
-    enterTextAndEnterByClass: function (session, locator, text) {
-      return session
-        .findByClassName(locator)
-        .click()
-        .sleep(2000)
-        .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
-        })
-    },
+      getTextById: function (session, locator) {
+        return session
+          .findById(locator)
+          .sleep(2000)
+          .getVisibleText()
+      },
 
-    dropDownMenuXpathOptionInput: function (session, locator, option) {
-      return session
-      .findByXpath(locator)
-      .click()
-      .findByXpath(option)
-      .click()
-      .end()
-      .end()
-    },
+      getPropertyByXpath: function (session, locator, property) {
+        return session
+          .findByXpath(locator)
+          .sleep(2000)
+          .getProperty(property)
+      },
 
-    dropDownMenuXpathSelectInput: function (session, locator, num) {
-      return session
-      .findByXpath(locator)
-      .click()
-      .end()
-      .then( function () {
-        for( i=0; i<num; i++ ) {
-          session.pressKeys(keys.ARROW_DOWN);
-        }
-        return session.pressKeys(keys.RETURN)
-      })
-    },
+      clickAButtonByXapth: function(session, locator) {
+        return session
+          .findByXpath(locator)
+            .click()
+            .sleep(1000)
+            .end()
+      },
 
-    clearTextBoxByXpath: function (session, locator, num) {
-      return session
-      .findByXpath(locator)
-      .click()
-      .then( function () {
-        for(i = 0; i < num; i++){
-          session.pressKeys(keys.BACKSPACE);
-        }
-      })
-    },
+      clickAButtonById: function(session, locator) {
+        return session
+          .findByClassName(locator)
+            .click()
+            .sleep(1000)
+            .end()
+      },
 
-    clearTextBoxById: function (session, locator, num) {
-      return session
-      .findById(locator)
-      .click()
-      .then( function () {
-        for(i = 0; i < num; i++){
-          session.pressKeys(keys.BACKSPACE);
-        }
-      })
-    },
+      uploadAFileById: function(session, id, file) {
+        return session
+          .findById(id)
+          .sleep(2000)
+          .type(require.toUrl(file))
+          .sleep(2000)
+          .end()
+      },
 
-    getTextByXpath: function (session, locator) {
-      return session
-      .findByXpath(locator)
-      .getVisibleText()
-    },
+      uploadAFileByXpath: function(session, locator, file) {
+        return session
+          .findByXpath(locator)
+          .sleep(2000)
+          .type(require.toUrl(file))
+          .sleep(2000)
+          .end()
+      }
 
-    getTextById: function (session, locator) {
-      return session
-      .findById(locator)
-      .sleep(2000)
-      .getVisibleText()
-    },
 
-    getPropertyByXpath: function (session, locator, property) {
-      return session
-      .findByXpath(locator)
-      .sleep(2000)
-      .getProperty(property)
-    },
-
-    clickAButtonByXapth: function(session, locator) {
-      return session
-      .findByXpath(locator)
-      .click()
-      .sleep(1000)
-      .end()
-    },
-
-    clickAButtonById: function(session, locator) {
-      return session
-      .findById(locator)
-      .click()
-      .sleep(1000)
-      .end()
-    },
-
-    uploadAFileById: function(session, id, file) {
-      return session
-      .findById(id)
-      .sleep(2000)
-      .type(require.toUrl(file))
-      .sleep(2000)
-      .end()
-    },
-
-    uploadAFileByXpath: function(session, locator, file) {
-      return session
-      .findByXpath(locator)
-      .sleep(2000)
-      .type(require.toUrl(file))
-      .sleep(2000)
-      .end()
     }
-
-
-  }
 });
