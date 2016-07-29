@@ -31,18 +31,6 @@ define([
       }
     },
 
-    enterTextAndEnter: function(session, locator, text, type) {
-      if(type=='xpath') {
-        return this.enterTextAndEnterByXpath(session, locator, text);
-      }
-      else if(type=='id') {
-        return this.enterTextAndEnterById(session, locator, text);
-      }
-      else if(type=='class') {
-        return this.enterTextAndEnterByClass(session, locator, text);
-      }
-    },
-
     clearTextBox: function(session, locator, num, type) {
       if (type == 'xpath') {
         return this.clearTextBoxByXpath(session, locator, num);
