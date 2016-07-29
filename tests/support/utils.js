@@ -56,24 +56,37 @@ define([
     },
 
     instagramLogin: function(session) {
-      // Store the current window handle
-      var winHandleBefore = session.getCurrentWindowHandle();
-
-      // Perform the click operation that opens new window
-      session.findByXpath(elements.UPLOAD_INSTA_BTN_LOCATOR).click();
-      session.switchToWindow().getCurrentWindowHandle();
-
       return session
+        .get(properties.INSTA_URL)
+        .setFindTimeout(10000)
+        .then(function() {
+          return actions.clickButton(session, elements.INSTA_LOGIN_LINK_LOCATOR, 'xpath');
+        })
+        .then(function() {
+          return actions.enterText(session, elements.INSTA_USERNAME_LOCATOR, properties.INSTA_USERNAME, 'xpath');
+        })
+        .then(function() {
+          return actions.enterText(session, elements.INSTA_PW_LOCATOR, properties.INSTA_PW, 'xpath');
+        })
+        .then(function() {
+          return actions.clickButton(session, elements.insta_LOGIN_BTN_LOCATOR, 'xpath');
+        })
+    },
+    
+    facebookLogin: function(session) {
+      return session
+        .get(properties.FACEBOOK_URL)
         .sleep(2000)
-        .findById(elements.INSTA_USERNAME_ID)
-          .type(properties.INSTA_USERNAME)
-          .end()
-        .findById(elements.INSTA_PW_ID)
-          .type(properties.INSTA_PW)
-          .end()
-        .findByCssSelector(elements.INSTA_LOGIN_BTN)
-          .click()
-          .end();
+        .then(function() {
+          return actions.enterText(session, elements.FB_EMAIL_LOCATOR, properties.FACEBOOK_EMAIL, 'xpath');
+        })
+        .then(function() {
+          return actions.enterText(session, elements.FB_PASSWORD_LOCATOR, properties.FACEBOOK_PW, 'xpath');
+        })
+        .then(function() {
+          return actions.clickButton(session, elements.FB_LOGIN_BTN_LOCATOR, 'xpath');
+        })
+      
     },
 
     fillUploadForm: function(session, theCheck, theTime) {
