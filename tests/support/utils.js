@@ -5,49 +5,46 @@ define([
   './pages/propertiesPage',
   './pages/common/actionsPage',
   'require'    
-], function(assert, keys, elements, properties, actions, require) {
+], function (assert, keys, elements, properties, actions, require) {
   return {
-    addCookie: function(session, COOKIE) {
+    addCookie: function (session, COOKIE) {
       return session
-        .then(function () {
-          COOKIE.forEach( function(entry) {
-            console.log('adding cookie');
+        .then( () => {
+          COOKIE.forEach( (entry) => {
             session.setCookie(entry);
           });
         });
       },
 
-    removeCookie: function(session, COOKIE) {
+    removeCookie: function (session, COOKIE) {
       return session
-        .then(function () {
-          COOKIE.forEach( function(entry) {
-            console.log('removing cookie');
+        .then( () => {
+          COOKIE.forEach( (entry) => {
             session.deleteCookie(entry.name);
           });
         });
     },
 
-    addFilter: function(session, filter) {
-      console.log('going to add filter');
+    addFilter: function (session, filter) {
         var text = filter.text.split('');
           return session
-            .then(function () {
-              text.forEach( function(entry) {
+            .then( () => {
+              text.forEach( (entry) => {
                 session.pressKeys(entry);
               });
               session.pressKeys(keys.RETURN);
             })
     },
 
-    addComboFilter: function(session, filter) {
+    addComboFilter: function (session, filter) {
       var text = filter.text.split('');
       var input;
       return session
-        .then(function () {
+        .then( () => {
           input = session.findByXpath(filter.locator);
           input.click();
           if (!filter.locator.match(/display/i)) {
-            text.forEach( function(entry) {
+            text.forEach( (entry) => {
               input.pressKeys(entry);
             });
             input.pressKeys(keys.RETURN);
@@ -55,62 +52,61 @@ define([
         });
     },
 
-    instagramLogin: function(session) {
+    instagramLogin: function (session) {
       return session
         .get(properties.INSTA_URL)
         .setFindTimeout(10000)
-        .then(function() {
+        .then( () => {
           return actions.clickButton(session, elements.INSTA_LOGIN_LINK_LOCATOR, 'xpath');
         })
-        .then(function() {
+        .then( () => {
           return actions.enterText(session, elements.INSTA_USERNAME_LOCATOR, properties.INSTA_USERNAME, 'xpath');
         })
-        .then(function() {
+        .then( () => {
           return actions.enterText(session, elements.INSTA_PW_LOCATOR, properties.INSTA_PW, 'xpath');
         })
-        .then(function() {
+        .then( () => {
           return actions.clickButton(session, elements.insta_LOGIN_BTN_LOCATOR, 'xpath');
         })
     },
     
-    facebookLogin: function(session) {
+    facebookLogin: function (session) {
       return session
         .get(properties.FACEBOOK_URL)
         .sleep(2000)
-        .then(function() {
+        .then( () => {
           return actions.enterText(session, elements.FB_EMAIL_LOCATOR, properties.FACEBOOK_EMAIL, 'xpath');
         })
-        .then(function() {
+        .then( () => {
           return actions.enterText(session, elements.FB_PASSWORD_LOCATOR, properties.FACEBOOK_PW, 'xpath');
         })
-        .then(function() {
+        .then( () => {
           return actions.clickButton(session, elements.FB_LOGIN_BTN_LOCATOR, 'xpath');
         })
       
     },
 
-    fillUploadForm: function(session, theCheck, theTime) {
-      console.log('in fillUploadForm');
+    fillUploadForm: function (session, uploadType, timestamp) {
       var comment;
       var nickname;
 
-      if (theCheck=="photo" || theCheck=="insta") {
-        comment=elements.UPLOAD_PHOTO_COMMENT_LOCATOR;
-        nickname=elements.UPLOAD_NICKNAME_LOCATOR;
-      } else if (theCheck=="video") {
-        comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
-        nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+      if (uploadType == "photo" || uploadType == "insta") {
+        comment = elements.UPLOAD_PHOTO_COMMENT_LOCATOR;
+        nickname = elements.UPLOAD_NICKNAME_LOCATOR;
+      } else if (uploadType == "video") {
+        comment = elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+        nickname = elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
       } else {
-        comment=elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
-        nickname=elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
+        comment = elements.UPLOAD_VIDEO_COMMENT_LOCATOR;
+        nickname = elements.UPLOAD_VIDEO_NICKNAME_LOCATOR;
       }
 
       return session
         .then( function () {
-          return actions.enterTextByXpath(session, comment, theTime);
+          return actions.enterTextByXpath(session, comment, timestamp);
         })
         .then( function () {
-          return actions.enterText(session, nickname, theTime, 'xpath');
+          return actions.enterText(session, nickname, timestamp, 'xpath');
         })
         .then( function () {
           return actions.selectCheckBox(session, elements.UPLOAD_TC_ID, 'id');
