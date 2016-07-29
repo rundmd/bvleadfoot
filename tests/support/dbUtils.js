@@ -24,7 +24,7 @@ define([
 
     getLocaleText: function(db, locales) {
       if (typeof locales === 'undefined' || locales == null) {
-        return db.collection('translations').find({}, { _id: 0 } ).toArray() 
+        return db.collection('translations').find({}, { _id: 0 } )
           .then( (docs) => {
             db.close();
             return docs;
