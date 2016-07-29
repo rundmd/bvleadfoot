@@ -5,23 +5,23 @@ define([
   'require'
 ], function(keys, elements, properties,require) {
   return {
-    uploadFile: function(session, locator, file, type) {
-      if ( type == 'id') {
+    uploadFile: function (session, locator, file, type) {
+      if (type == 'id') {
         return this.uploadFileById(session, locator, file);
-      } else if ( type == 'xpath') {
+      } else if (type == 'xpath') {
         return this.uploadFileByXpath(session, locator, file);
       }
     },
 
-    clickButton: function(session, locator, type) {
-      if ( type == 'xpath' ) {
+    clickButton: function (session, locator, type) {
+      if (type == 'xpath') {
         return this.clickButtonByXpath(session, locator);
       } else if (type == 'id') {
         return this.clickButtonById(session, locator);
       }
     },
 
-    enterText: function(session, locator, text, type) {
+    enterText: function (session, locator, text, type) {
       if (type == 'xpath') {
         return this.enterTextByXpath(session, locator, text);
       } else if (type == 'id') {
@@ -31,19 +31,19 @@ define([
       }
     },
 
-    enterTextAndEnter: function(session, locator, text, type) {
-      if(type=='xpath') {
+    enterTextAndEnter: function (session, locator, text, type) {
+      if (type == 'xpath') {
         return this.enterTextAndEnterByXpath(session, locator, text);
       }
-      else if(type=='id') {
+      else if (type == 'id') {
         return this.enterTextAndEnterById(session, locator, text);
       }
-      else if(type=='class') {
+      else if (type == 'class') {
         return this.enterTextAndEnterByClass(session, locator, text);
       }
     },
 
-    clearTextBox: function(session, locator, num, type) {
+    clearTextBox: function (session, locator, num, type) {
       if (type == 'xpath') {
         return this.clearTextBoxByXpath(session, locator, num);
       } else if (type == 'id') {
@@ -51,7 +51,7 @@ define([
       }
     },
 
-    getText: function(session, locator, type) {
+    getText: function (session, locator, type) {
       if (type == 'xpath') {
         return this.getTextByXpath(session, locator);
       } else if (type == 'id') {
@@ -59,7 +59,15 @@ define([
       }
     },
 
-    selectCheckBox: function(session, locator, type) {
+    getProperty: function (session, locator, property, type) {
+      if (type == 'xpath') {
+        return this.getPropertyByXpath(session, locator, property);
+      } else if (type == 'id') {
+        return this.getPropertyById(session, locator, property);
+      }
+    }, 
+
+    selectCheckBox: function (session, locator, type) {
       if (type == 'xpath') {
         return this.selectCheckBoxByXpath(session, locator);
       } else if (type == 'id') {
@@ -105,7 +113,7 @@ define([
         .findByXpath(locator)
         .click()
         .sleep(2000)
-        .then( function () {
+        .then( () => {
           session.pressKeys(text)
           return session.pressKeys(keys.RETURN)
         })
@@ -116,7 +124,7 @@ define([
         .findById(locator)
         .click()
         .sleep(2000)
-        .then( function () {
+        .then( () => {
           session.pressKeys(text)
           return session.pressKeys(keys.RETURN)
         })
@@ -127,7 +135,7 @@ define([
         .findByClassName(locator)
         .click()
         .sleep(2000)
-        .then( function () {
+        .then( () => {
           session.pressKeys(text)
           return session.pressKeys(keys.RETURN)
         })
@@ -138,7 +146,7 @@ define([
         .findByXpath(locator)
           .click()
           .end()
-      .then( function () {
+      .then( () => {
         for( i=0; i<num; i++ ) {
           session.pressKeys(keys.ARROW_DOWN);
         }
@@ -150,7 +158,7 @@ define([
       return session
         .findByXpath(locator)
           .click()
-        .then( function () {
+        .then( () => {
           for(i = 0; i < num; i++){
             session.pressKeys(keys.BACKSPACE);
           }
@@ -172,6 +180,12 @@ define([
     getPropertyByXpath: function (session, locator, property) {
       return session
         .findByXpath(locator)
+          .getProperty(property);
+    },
+
+    getPropertyById: function (session, locator, property) {
+      return session
+        .findById(locator)
           .getProperty(property);
     },
 
