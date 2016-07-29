@@ -100,39 +100,6 @@ define([
           .end();
     },
 
-    enterTextAndEnterByXpath: function (session, locator, text) {
-      return session
-        .findByXpath(locator)
-        .click()
-        .sleep(2000)
-        .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
-        })
-    },
-
-    enterTextAndEnterById: function (session, locator, text) {
-      return session
-        .findById(locator)
-        .click()
-        .sleep(2000)
-        .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
-        })
-    },
-
-    enterTextAndEnterByClass: function (session, locator, text) {
-      return session
-        .findByClassName(locator)
-        .click()
-        .sleep(2000)
-        .then( function () {
-          session.pressKeys(text)
-          return session.pressKeys(keys.RETURN)
-        })
-    },
-
     dropDownMenuXpathSelectInput: function (session, locator, num) {
       return session
         .findByXpath(locator)
